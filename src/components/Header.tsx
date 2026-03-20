@@ -1,5 +1,6 @@
 import { ThemeToggle } from './ThemeToggle'
 import { APP_URL } from '../config'
+import logo from '@/assets/logo.png'
 import './Header.css'
 
 function Header() {
@@ -8,7 +9,7 @@ function Header() {
       <div className="header-container">
         <div className="header-left">
           <a href="/" className="header-logo" style={{ textDecoration: 'none' }}>
-            <img src="/logo.png" alt="GrindURUS" className="header-logo-img" />
+            <img src={logo} alt="GrindURUS" className="header-logo-img" />
             <span className="header-logo-text">GrindURUS</span>
           </a>
         </div>

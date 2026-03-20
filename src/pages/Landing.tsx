@@ -1,5 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { APP_URL } from '../config'
+import logo from '@/assets/logo.png'
+import binanceLogo from '@/assets/binance-logo.png'
+import cowLogo from '@/assets/cow-logo.png'
+import logoLifiDark from '@/assets/logo_lifi_dark.svg'
+import logoLifiLight from '@/assets/logo_lifi_light.svg'
+import bullSell from '@/assets/bull-sell.png'
+import bullIllustration from '@/assets/bull-illustration.png'
 import './Landing.css'
 
 /* Lemniscate path for even arc-length distribution (64 points) */
@@ -20,10 +27,10 @@ const LEMNISCATE_PATH = (() => {
 const INTEGRATED_PARTNERS = [
   { id: 'ethereum', name: 'ETHEREUM', href: 'https://ethereum.org', img: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png' },
   { id: 'arbitrum', name: 'ARBITRUM', href: 'https://arbitrum.io', img: 'https://assets.coingecko.com/coins/images/16547/small/photo_2023-03-29_21.47.00.jpeg' },
-  { id: 'binance', name: 'BINANCE', href: 'https://binance.com', img: '/binance-logo.png' },
-  { id: 'cow', name: 'COW PROTOCOL', href: 'https://cow.fi', img: '/cow-logo.png' },
+  { id: 'binance', name: 'BINANCE', href: 'https://binance.com', img: binanceLogo },
+  { id: 'cow', name: 'COW PROTOCOL', href: 'https://cow.fi', img: cowLogo },
   { id: 'solana', name: 'SOLANA', href: 'https://solana.com', img: 'https://assets.coingecko.com/coins/images/4128/small/solana.png' },
-  { id: 'lifi', name: 'LI.FI', href: 'https://li.fi', img: '/logo_lifi_dark.svg', imgLight: '/logo_lifi_light.svg' },
+  { id: 'lifi', name: 'LI.FI', href: 'https://li.fi', img: logoLifiDark, imgLight: logoLifiLight },
 ]
 
 const ORBIT_TOKENS = [
@@ -120,7 +127,7 @@ export default function Landing() {
       </div>
 
       <div className="landing-hero-bg">
-        <img src="/logo.png" alt="" className="landing-hero-logo" aria-hidden />
+        <img src={logo} alt="" className="landing-hero-logo" aria-hidden />
       </div>
 
       <section className="landing-hero">
@@ -174,7 +181,7 @@ export default function Landing() {
           <div className="landing-mint-content">
             <div className="landing-mint-visual">
               <img
-                src="/bull-sell.png"
+                src={bullSell}
                 alt=""
                 className={`landing-mint-img ${
                   (activeToggle === 0 && mintMode === 'sell') || (activeToggle === 1 && mintMode === 'buy')
@@ -184,7 +191,7 @@ export default function Landing() {
                 aria-hidden
               />
               <img
-                src="/bull-illustration.png"
+                src={bullIllustration}
                 alt=""
                 className={`landing-mint-img landing-mint-img-red ${
                   (activeToggle === 0 && mintMode === 'buy') || (activeToggle === 1 && mintMode === 'sell')
