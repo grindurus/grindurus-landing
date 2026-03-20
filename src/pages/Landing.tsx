@@ -136,8 +136,7 @@ export default function Landing() {
           <span>Automated Market Taker</span>
         </h1>
         <p className="landing-subtitle">
-          multichain price volatility harvester protocol<br />
-          automated control of directional and inventory risks
+          multichain price volatility harvester protocol
         </p>
         <a
           ref={buttonRef}
