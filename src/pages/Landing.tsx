@@ -1,273 +1,245 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
-import { APP_URL } from '../config'
-import logo from '@/assets/logo.png'
-import binanceLogo from '@/assets/binance-logo.png'
-import cowLogo from '@/assets/cow-logo.png'
-import logoLifiDark from '@/assets/logo_lifi_dark.svg'
-import logoLifiLight from '@/assets/logo_lifi_light.svg'
-import bullSell from '@/assets/bull-sell.png'
-import bullIllustration from '@/assets/bull-illustration.png'
+import { useMemo, useState } from 'react'
 import './Landing.css'
 
-/* Lemniscate path for even arc-length distribution (64 points) */
-const LEMNISCATE_PATH = (() => {
-  const pts: string[] = []
-  const scaleX = 520
-  const scaleY = 500
-  for (let i = 0; i <= 64; i++) {
-    const t = (2 * Math.PI * i) / 64
-    const denom = 1 + Math.sin(t) ** 2
-    const x = (Math.cos(t) / denom) * scaleX
-    const y = (Math.sin(t) * Math.cos(t) / denom) * scaleY
-    pts.push(`${x.toFixed(1)},${y.toFixed(1)}`)
-  }
-  return `M ${pts.join(' L ')} Z`
-})()
+const APY = 0.2
+const MARKET_APY = 0.08
 
-const INTEGRATED_PARTNERS = [
-  { id: 'ethereum', name: 'ETHEREUM', href: 'https://ethereum.org', img: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png' },
-  { id: 'arbitrum', name: 'ARBITRUM', href: 'https://arbitrum.io', img: 'https://assets.coingecko.com/coins/images/16547/small/photo_2023-03-29_21.47.00.jpeg' },
-  { id: 'binance', name: 'BINANCE', href: 'https://binance.com', img: binanceLogo },
-  { id: 'cow', name: 'COW PROTOCOL', href: 'https://cow.fi', img: cowLogo },
-  { id: 'solana', name: 'SOLANA', href: 'https://solana.com', img: 'https://assets.coingecko.com/coins/images/4128/small/solana.png' },
-  { id: 'lifi', name: 'LI.FI', href: 'https://li.fi', img: logoLifiDark, imgLight: logoLifiLight },
-]
+const LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const STRATEGY_DATA = [100, 108, 106, 118, 122, 120, 130, 135, 132, 142, 145, 148.5]
+const MARKET_DATA = [100, 105, 98, 112, 110, 102, 115, 118, 112, 120, 115, 118.2]
 
-const ORBIT_TOKENS = [
-  { symbol: 'USDC', color: '#2775ca', label: '$' },
-  { symbol: 'WETH', color: '#627eea', label: 'W' },
-  { symbol: 'USDT', color: '#26a17b', label: '₮' },
-  { symbol: 'UNI', color: '#ff007a', label: 'U' },
-  { symbol: 'AAVE', color: '#2ebac6', label: 'A' },
-  { symbol: 'DAI', color: '#f4b731', label: 'D' },
-  { symbol: 'WBTC', color: '#f09242', label: '₿' },
-  { symbol: 'LINK', color: '#2a5ada', label: 'L' },
-  { symbol: 'CRV', color: '#40649f', label: 'C' },
-  { symbol: 'MKR', color: '#1aab9b', label: 'M' },
-  { symbol: 'SNX', color: '#00d1ff', label: 'S' },
-  { symbol: 'SUSHI', color: '#fa52a0', label: 'H' },
-  { symbol: 'COMP', color: '#00d395', label: 'C' },
-  { symbol: 'ARB', color: '#28a0f0', label: 'A' },
-  { symbol: 'OP', color: '#ff0420', label: 'O' },
-]
+function formatCurrency(value: number): string {
+  return value.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 2,
+  })
+}
 
-interface SpawnedParticle {
-  id: number
-  midX: number
-  midY: number
-  endX: number
-  endY: number
+function formatPercent(value: number): string {
+  const sign = value >= 0 ? '+' : ''
+  return `${sign}${value.toFixed(2)}%`
+}
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), max)
+}
+
+function seriesToPath(values: number[], width: number, height: number, padding: number): string {
+  const min = Math.min(...values)
+  const max = Math.max(...values)
+  const range = Math.max(max - min, 1)
+  const innerWidth = width - padding * 2
+  const innerHeight = height - padding * 2
+
+  return values
+    .map((value, index) => {
+      const x = padding + (index / (values.length - 1)) * innerWidth
+      const y = padding + ((max - value) / range) * innerHeight
+      return `${index === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`
+    })
+    .join(' ')
 }
 
 export default function Landing() {
-  const landingRef = useRef<HTMLDivElement>(null)
-  const buttonRef = useRef<HTMLAnchorElement>(null)
-  const [particles, setParticles] = useState<SpawnedParticle[]>([])
-  const [mintMode, setMintMode] = useState<'buy' | 'sell'>('buy')
-  const [activeToggle, setActiveToggle] = useState<0 | 1>(0)
-  const nextIdRef = useRef(0)
+  const [investment, setInvestment] = useState<number>(10000)
+  const [startDate, setStartDate] = useState<string>('2025-01-01')
+  const [endDate, setEndDate] = useState<string>('2025-12-31')
 
-  const spawnParticle = useCallback(() => {
-    const landing = landingRef.current
-    const button = buttonRef.current
-    if (!landing || !button) return
+  const {
+    years,
+    finalStrategy,
+    finalMarket,
+    strategyReturn,
+    marketReturn,
+    alpha,
+  } = useMemo(() => {
+    const start = new Date(startDate)
+    const end = new Date(endDate)
+    const amount = clamp(Number.isFinite(investment) ? investment : 0, 0, Number.MAX_SAFE_INTEGER)
 
-    const landingRect = landing.getBoundingClientRect()
-    const buttonRect = button.getBoundingClientRect()
-
-    const centerX = landingRect.width / 2
-    const centerY = landingRect.height / 2
-    const buttonCenterX = buttonRect.left - landingRect.left + buttonRect.width / 2
-    const buttonCenterY = buttonRect.top - landingRect.top + buttonRect.height / 2
-    const endX = buttonCenterX - centerX
-    const endY = buttonCenterY - centerY
-
-    const midX = (Math.random() - 0.5) * 200
-    const midY = (Math.random() - 0.5) * 200
-
-    const id = nextIdRef.current++
-    setParticles((prev) => [
-      ...prev,
-      { id, midX, midY, endX, endY },
-    ])
-    setTimeout(() => {
-      setParticles((prev) => prev.filter((p) => p.id !== id))
-    }, 3200)
-  }, [])
-
-  useEffect(() => {
-    const initial = setTimeout(spawnParticle, 2000)
-    const timer = setInterval(spawnParticle, 7000)
-    return () => {
-      clearTimeout(initial)
-      clearInterval(timer)
+    if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || end <= start) {
+      return {
+        years: 0,
+        finalStrategy: amount,
+        finalMarket: amount,
+        strategyReturn: 0,
+        marketReturn: 0,
+        alpha: 0,
+      }
     }
-  }, [spawnParticle])
+
+    const msPerYear = 1000 * 60 * 60 * 24 * 365.25
+    const elapsedYears = (end.getTime() - start.getTime()) / msPerYear
+
+    const strategyFinal = amount * (1 + APY) ** elapsedYears
+    const marketFinal = amount * (1 + MARKET_APY) ** elapsedYears
+
+    const strategyPct = amount > 0 ? ((strategyFinal - amount) / amount) * 100 : 0
+    const marketPct = amount > 0 ? ((marketFinal - amount) / amount) * 100 : 0
+
+    return {
+      years: elapsedYears,
+      finalStrategy: strategyFinal,
+      finalMarket: marketFinal,
+      strategyReturn: strategyPct,
+      marketReturn: marketPct,
+      alpha: strategyPct - marketPct,
+    }
+  }, [investment, startDate, endDate])
+
+  const chartWidth = 900
+  const chartHeight = 360
+  const chartPadding = 28
+
+  const strategyPath = useMemo(
+    () => seriesToPath(STRATEGY_DATA, chartWidth, chartHeight, chartPadding),
+    [chartWidth, chartHeight, chartPadding],
+  )
+  const marketPath = useMemo(
+    () => seriesToPath(MARKET_DATA, chartWidth, chartHeight, chartPadding),
+    [chartWidth, chartHeight, chartPadding],
+  )
 
   return (
-    <div className="landing" ref={landingRef}>
-      <section className="landing-hero-section">
-      <div
-        className="landing-orbit"
-        style={{ '--orbit-path': `path("${LEMNISCATE_PATH}")` } as React.CSSProperties}
-      >
-        {ORBIT_TOKENS.map((token, i) => (
-          <div
-            key={token.symbol}
-            className="landing-orbit-icon"
-            style={{
-              '--orbit-index': i,
-              '--orbit-total': ORBIT_TOKENS.length,
-              '--token-color': token.color,
-            } as React.CSSProperties}
-          >
-            <span className="landing-orbit-icon-symbol">{token.label}</span>
-          </div>
-        ))}
-      </div>
-
-      <div className="landing-hero-bg">
-        <img src={logo} alt="" className="landing-hero-logo" aria-hidden />
-      </div>
-
-      <section className="landing-hero">
-        <h1 className="landing-title">
-          <span>GrindURUS</span>
-          <span>Automated Market Taker</span>
-        </h1>
-        <p className="landing-subtitle">
-          multichain price volatility harvester protocol
-        </p>
-        <a
-          ref={buttonRef}
-          href={`${APP_URL}/grinders`}
-          className="landing-cta"
-        >
-          Open App
-        </a>
-      </section>
-      </section>
-
-      <section className="landing-integrated-section">
-        <h2 className="landing-integrated-title">Integrated with</h2>
-        <div className="landing-integrated-marquee">
-          <div className="landing-integrated-track">
-            {[...INTEGRATED_PARTNERS, ...INTEGRATED_PARTNERS, ...INTEGRATED_PARTNERS, ...INTEGRATED_PARTNERS].map((p, i) => (
-              <a
-                key={`${p.id}-${i}`}
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="landing-integrated-logo"
-              >
-                {'imgLight' in p ? (
-                  <>
-                    <img src={p.img} alt={p.name} width={32} height={32} className="landing-integrated-logo-dark" aria-hidden />
-                    <img src={(p as { imgLight: string }).imgLight} alt={p.name} width={32} height={32} className="landing-integrated-logo-light" aria-hidden />
-                  </>
-                ) : (
-                  <img src={p.img} alt={p.name} width={32} height={32} />
-                )}
-                <span className="landing-integrated-name">{p.name}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="landing-mint-section">
-        <div className="landing-mint-card">
-          <div className="landing-mint-content">
-            <div className="landing-mint-visual">
-              <img
-                src={bullSell}
-                alt=""
-                className={`landing-mint-img ${
-                  (activeToggle === 0 && mintMode === 'sell') || (activeToggle === 1 && mintMode === 'buy')
-                    ? 'active'
-                    : ''
-                }`}
-                aria-hidden
-              />
-              <img
-                src={bullIllustration}
-                alt=""
-                className={`landing-mint-img landing-mint-img-red ${
-                  (activeToggle === 0 && mintMode === 'buy') || (activeToggle === 1 && mintMode === 'sell')
-                    ? 'active'
-                    : ''
-                }`}
-                aria-hidden
-              />
-            </div>
-            <div className="landing-mint-text-block">
-            <h2 className="landing-mint-title">Strategy</h2>
-            <div className="landing-mint-toggle-row">
-              <div className="landing-mint-toggle-group">
-                <span className="landing-mint-toggle-label">DIRECT</span>
-                <div className="landing-mint-toggle">
-                  <button
-                    type="button"
-                    className={`landing-mint-toggle-btn ${mintMode === 'buy' && activeToggle === 0 ? 'active' : ''}`}
-                    onClick={() => { setMintMode('buy'); setActiveToggle(0); }}
-                  >
-                    buy low
-                  </button>
-                  <button
-                    type="button"
-                    className={`landing-mint-toggle-btn ${mintMode === 'sell' && activeToggle === 0 ? 'active' : ''}`}
-                    onClick={() => { setMintMode('sell'); setActiveToggle(0); }}
-                  >
-                    sell high
-                  </button>
-                </div>
-              </div>
-              <span className="landing-mint-toggle-or">OR</span>
-              <div className="landing-mint-toggle-group">
-                <span className="landing-mint-toggle-label">INVERSE</span>
-                <div className="landing-mint-toggle">
-                  <button
-                    type="button"
-                    className={`landing-mint-toggle-btn ${mintMode === 'sell' && activeToggle === 1 ? 'active' : ''}`}
-                    onClick={() => { setMintMode('sell'); setActiveToggle(1); }}
-                  >
-                    sell high
-                  </button>
-                  <button
-                    type="button"
-                    className={`landing-mint-toggle-btn ${mintMode === 'buy' && activeToggle === 1 ? 'active' : ''}`}
-                    onClick={() => { setMintMode('buy'); setActiveToggle(1); }}
-                  >
-                    buy low
-                  </button>
-                </div>
-              </div>
-            </div>
-            <h3 className="landing-mint-subtitle">
-              {mintMode === 'buy' ? 'Aggressive Buy' : 'Profitable Sell'}
-            </h3>
-            <a href={`${APP_URL}/grinders`} className="landing-mint-btn">
-              Open App
+    <div className="landing">
+      <section className="hero-section">
+        <div className="hero-grid-overlay" aria-hidden />
+        <div className="hero-content">
+          <h1 className="hero-title">GrindURUS</h1>
+          <p className="hero-subtitle">Automated market taker protocol</p>
+          <p className="hero-link-row">
+            Statistically proven 20% annual return{' '}
+            <a href="#backtest" className="hero-link">
+              [See Backtest]
             </a>
-            </div>
+          </p>
+
+          <div className="hero-manifesto">
+            <p>No futures. No options. Just pure math.</p>
+            <p className="hero-emphasis">We BUY LOW.</p>
+            <p className="hero-emphasis">We SELL HIGH.</p>
+            <p>We profit on volatility.</p>
           </div>
         </div>
       </section>
 
-      {particles.map((p) => (
-        <div
-          key={p.id}
-          className="landing-particle"
-          style={
-            {
-              '--mid-x': `${p.midX}px`,
-              '--mid-y': `${p.midY}px`,
-              '--end-x': `${p.endX}px`,
-              '--end-y': `${p.endY}px`,
-            } as React.CSSProperties
-          }
-        />
-      ))}
+      <section id="backtest" className="backtest-section">
+        <div className="section-heading">
+          <h2>Backtest</h2>
+          <p>Learn how much would you have earned if you invested:</p>
+        </div>
+
+        <div className="backtest-grid">
+          <article className="control-card">
+            <h3>Calculator</h3>
+
+            <label htmlFor="investment">Investment Amount (USD)</label>
+            <input
+              id="investment"
+              type="number"
+              min={0}
+              step={100}
+              value={investment}
+              onChange={(e) => setInvestment(Number(e.target.value))}
+            />
+
+            <label htmlFor="start-date">Start Date</label>
+            <input
+              id="start-date"
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+
+            <label htmlFor="end-date">End Date</label>
+            <input
+              id="end-date"
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+
+            <div className="result-box">
+              <p className="result-label">Estimated Final Amount (20% annualized)</p>
+              <p className="result-value">{formatCurrency(finalStrategy)}</p>
+              <p className="result-meta">Net profit: {formatCurrency(finalStrategy - investment)}</p>
+            </div>
+
+            <ul className="metric-list" aria-label="strategy metrics">
+              <li>
+                <span>Period</span>
+                <strong>{years.toFixed(2)} years</strong>
+              </li>
+              <li>
+                <span>Strategy Return</span>
+                <strong className="positive">{formatPercent(strategyReturn)}</strong>
+              </li>
+              <li>
+                <span>Market Return (8% benchmark)</span>
+                <strong>{formatPercent(marketReturn)}</strong>
+              </li>
+              <li>
+                <span>Outperformance</span>
+                <strong className="accent">{formatPercent(alpha)}</strong>
+              </li>
+            </ul>
+
+            <p className="footnote">
+              Backtest chart below shows a sample 2025 strategy curve vs SOL market baseline.
+            </p>
+          </article>
+
+          <article className="chart-card">
+            <div className="chart-header">
+              <h3>Performance Chart (2025)</h3>
+              <div className="legend">
+                <span><i className="legend-dot strategy" /> Strategy</span>
+                <span><i className="legend-dot market" /> Market (SOL)</span>
+              </div>
+            </div>
+
+            <div className="chart-wrapper" role="img" aria-label="Backtest strategy and market chart">
+              <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="strategyGlow" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="rgba(247,37,133,0.45)" />
+                    <stop offset="100%" stopColor="rgba(247,37,133,0)" />
+                  </linearGradient>
+                </defs>
+
+                <path
+                  d={`${strategyPath} L ${chartWidth - chartPadding} ${chartHeight - chartPadding} L ${chartPadding} ${chartHeight - chartPadding} Z`}
+                  fill="url(#strategyGlow)"
+                />
+                <path d={marketPath} className="market-line" />
+                <path d={strategyPath} className="strategy-line" />
+              </svg>
+
+              <div className="x-axis-labels">
+                {LABELS.map((label) => (
+                  <span key={label}>{label}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="chart-footer">
+              <div>
+                <p>Sample Start</p>
+                <strong>{formatCurrency(investment)}</strong>
+              </div>
+              <div>
+                <p>Sample Strategy End</p>
+                <strong className="accent">{formatCurrency(finalStrategy)}</strong>
+              </div>
+              <div>
+                <p>Sample Market End</p>
+                <strong>{formatCurrency(finalMarket)}</strong>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
     </div>
   )
 }
