@@ -7,11 +7,6 @@
   margin-top: auto;
 }
 
-[data-theme="light"] .footer {
-  background: #fff;
-  border-top-color: rgba(0, 0, 0, 0.12);
-}
-
 .footer-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -34,10 +29,6 @@
   margin: 0;
 }
 
-[data-theme="light"] .footer-copyright {
-  color: rgba(0, 0, 0, 0.75);
-}
-
 .footer-social {
   display: flex;
   gap: 1rem;
@@ -54,11 +45,6 @@
   background: #fff;
   color: #000;
   transition: opacity 0.2s, transform 0.2s;
-}
-
-[data-theme="light"] .footer-social-icon {
-  background: rgba(0, 0, 0, 0.08);
-  color: #1a1a1a;
 }
 
 .footer-social-icon:hover {

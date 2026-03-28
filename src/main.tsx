@@ -4,6 +4,8 @@ import App from './App'
 import favicon from '@/assets/logo.png'
 import './index.css'
 
+document.documentElement.setAttribute('data-theme', 'dark')
+
 let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]')
 if (!link) {
   link = document.createElement('link')

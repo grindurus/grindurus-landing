@@ -1,4 +1,3 @@
-import { ThemeToggle } from './ThemeToggle'
 import { APP_URL } from '../config'
 import logo from '@/assets/logo.png'
 import './Header.css'
@@ -16,9 +15,8 @@ function Header() {
 
         <div className="header-actions">
           <a href={`${APP_URL}/grinders`} className="header-open-app-btn">
-            Open App
+            Invest
           </a>
-          <ThemeToggle />
         </div>
       </div>
     </header>

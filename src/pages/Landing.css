@@ -94,16 +94,6 @@
   }
 }
 
-.hero-grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 30px 30px;
-  mask-image: radial-gradient(circle at center, black 50%, transparent 100%);
-  pointer-events: none;
-}
-
 .hero-content {
   max-width: 980px;
   margin: 0 auto;
@@ -124,7 +114,7 @@
 .hero-subtitle {
   margin: 0.9rem 0 0;
   font-size: clamp(1.05rem, 2.2vw, 1.55rem);
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.86);
 }
 
 .hero-link-row {
@@ -146,12 +136,19 @@
   border-color: var(--primary-hover);
 }
 
-.hero-manifesto {
-  margin-top: 2.5rem;
-  max-width: 700px;
+.manifesto-section {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
 }
 
-.hero-manifesto p {
+.manifesto-content {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2.8rem 2rem;
+}
+
+.manifesto-content p {
   margin: 0.35rem 0;
   font-family: 'JetBrains Mono', monospace;
   font-size: clamp(1rem, 1.6vw, 1.2rem);
@@ -308,6 +305,30 @@ input::-webkit-calendar-picker-indicator {
   line-height: 1.45;
 }
 
+.backtest-test-btn {
+  margin-top: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  min-width: 210px;
+  padding: 0.9rem 1.35rem;
+  border-radius: 12px;
+  border: 1px solid var(--primary);
+  background: rgba(247, 37, 133, 0.08);
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.98rem;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.backtest-test-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
 .chart-card {
   padding: 1rem;
 }
@@ -418,6 +439,62 @@ input::-webkit-calendar-picker-indicator {
   color: var(--primary);
 }
 
+.chart-action-row {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.chart-action-copy {
+  margin: 0;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.84);
+  max-width: 560px;
+}
+
+.landing-bottom-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem 4.75rem;
+}
+
+.landing-bottom-copy {
+  margin: 0 0 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.92rem, 1.8vw, 1.08rem);
+  color: #e4e4e7;
+  text-align: center;
+}
+
+.landing-invest-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 62px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(90deg, #f72585, #d41f72);
+  box-shadow: 0 10px 28px rgba(247, 37, 133, 0.34);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.landing-invest-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(247, 37, 133, 0.44);
+}
+
 @keyframes reveal-up {
   0% {
     opacity: 0;
@@ -477,11 +554,24 @@ input::-webkit-calendar-picker-indicator {
     padding: 3rem 1rem 4rem;
   }
 
+  .manifesto-content {
+    padding: 2.3rem 1rem;
+  }
+
   .chart-wrapper svg {
     height: 260px;
   }
 
   .chart-footer {
     grid-template-columns: 1fr;
+  }
+
+  .landing-bottom-cta {
+    padding: 0 1rem 3.5rem;
+  }
+
+  .landing-invest-btn {
+    width: 100%;
+    max-width: 320px;
   }
 }

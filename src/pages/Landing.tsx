@@ -1,4 +1,5 @@
 import { useMemo, useState, type CSSProperties } from 'react'
+import { APP_URL } from '../config'
 import './Landing.css'
 
 const APY = 0.2
@@ -157,7 +158,6 @@ export default function Landing() {
             </div>
           ))}
         </div>
-        <div className="hero-grid-overlay" aria-hidden />
         <div className="hero-content">
           <h1 className="hero-title">GrindURUS</h1>
           <p className="hero-subtitle">Automated market taker protocol</p>
@@ -167,13 +167,15 @@ export default function Landing() {
               [See Backtest]
             </a>
           </p>
+        </div>
+      </section>
 
-          <div className="hero-manifesto">
-            <p>No futures. No options. Just pure math.</p>
-            <p className="hero-emphasis">We BUY LOW.</p>
-            <p className="hero-emphasis">We SELL HIGH.</p>
-            <p>We profit on volatility.</p>
-          </div>
+      <section className="manifesto-section" aria-label="strategy manifesto">
+        <div className="manifesto-content">
+          <p>No futures. No options. Just pure math.</p>
+          <p className="hero-emphasis">We BUY LOW.</p>
+          <p className="hero-emphasis">We SELL HIGH.</p>
+          <p>We profit on volatility.</p>
         </div>
       </section>
 
@@ -290,8 +292,24 @@ export default function Landing() {
                 <strong>{formatCurrency(finalMarket)}</strong>
               </div>
             </div>
+
+            <div className="chart-action-row">
+              <p className="chart-action-copy">
+                Interested in how strategy behaves in other situations? Test it yourself:
+              </p>
+              <a href="#backtest" className="backtest-test-btn">
+                Test on other data
+              </a>
+            </div>
           </article>
         </div>
+      </section>
+
+      <section className="landing-bottom-cta" aria-label="invest call to action">
+        <p className="landing-bottom-copy">Interested? Take part and allow GrindURUS to earn you money</p>
+        <a href={`${APP_URL}/grinders`} className="landing-invest-btn">
+          Invest
+        </a>
       </section>
     </div>
   )
