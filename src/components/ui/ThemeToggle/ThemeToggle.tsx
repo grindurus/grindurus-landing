@@ -13,7 +13,9 @@ export function ThemeToggle() {
       let effectiveTheme: 'light' | 'dark' = 'dark'
 
       if (selectedTheme === 'system') {
-        effectiveTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        effectiveTheme = window.matchMedia('(prefers-color-scheme: light)').matches
+          ? 'light'
+          : 'dark'
       } else {
         effectiveTheme = selectedTheme
       }
@@ -37,7 +39,8 @@ export function ThemeToggle() {
       <button
         className="theme-toggle-btn"
         onClick={() => {
-          const nextTheme = theme === 'light' ? 'system' : theme === 'system' ? 'dark' : 'light'
+          const nextTheme =
+            theme === 'light' ? 'system' : theme === 'system' ? 'dark' : 'light'
           setTheme(nextTheme)
         }}
       >

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -8,6 +10,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  /* Theme tokens */
   --bg-primary: #000000;
   --bg-secondary: #1a1a1a;
   --bg-tertiary: #222222;
@@ -17,6 +20,11 @@
   --text-primary: rgba(255, 255, 255, 0.87);
   --text-secondary: #888888;
   --text-muted: #666666;
+
+  /* Brand tokens */
+  --color-brand-pink: #ff69b4;
+  --color-brand-red: #ff1493;
+  --color-brand-gradient: linear-gradient(90deg, #ff69b4, #ff1493);
 }
 
 [data-theme="dark"] {

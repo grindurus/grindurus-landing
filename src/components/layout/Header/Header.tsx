@@ -1,5 +1,5 @@
-import { ThemeToggle } from './ThemeToggle'
-import { APP_URL } from '../config'
+import { ThemeToggle } from '../../ui/ThemeToggle/ThemeToggle'
+import { APP_URL } from '../../../config'
 import logo from '@/assets/logo.png'
 import './Header.css'
 

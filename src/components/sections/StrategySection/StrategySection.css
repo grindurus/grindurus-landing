@@ -1,0 +1,159 @@
+.strategy-section {
+  padding: 4rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.strategy-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: #fff;
+  text-align: center;
+  margin: 0 0 2.5rem 0;
+}
+
+.strategy-card {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.strategy-content {
+  display: grid;
+  grid-template-columns: calc(50% - 1rem) calc(50% - 1rem);
+  gap: 2rem;
+  min-height: 50vh;
+  container-type: inline-size;
+  container-name: strategy-content;
+}
+
+/* ── Visual panel ── */
+.strategy-visual {
+  position: relative;
+  min-height: 320px;
+  width: 100%;
+  align-self: stretch;
+}
+
+.strategy-img {
+  position: absolute;
+  inset: 0;
+  width: 50cqi;
+  max-width: 100%;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  object-fit: cover;
+  object-position: 15% center;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 88%, transparent 100%);
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 88%, transparent 100%);
+}
+
+.strategy-img.active {
+  opacity: 1;
+}
+
+/* ── Text panel ── */
+.strategy-text-block {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.strategy-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.strategy-toggle-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.strategy-toggle-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.strategy-toggle-or {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 1.1rem;
+}
+
+.strategy-toggle {
+  display: flex;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.strategy-toggle-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.strategy-toggle-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.strategy-toggle-btn.active {
+  background: var(--color-brand-gradient);
+  color: #fff;
+}
+
+.strategy-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 1rem 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .strategy-content {
+    grid-template-columns: 1fr;
+  }
+
+  .strategy-visual {
+    min-height: 240px;
+  }
+}
+
+/* Light theme overrides */
+[data-theme="light"] .strategy-title  { color: #1a1a1a; }
+[data-theme="light"] .strategy-card   { background: #fff; border-color: rgba(0, 0, 0, 0.12); }
+[data-theme="light"] .strategy-toggle-label { color: rgba(0, 0, 0, 0.5); }
+[data-theme="light"] .strategy-toggle-or    { color: rgba(0, 0, 0, 0.5); }
+[data-theme="light"] .strategy-toggle       { background: rgba(0, 0, 0, 0.06); }
+[data-theme="light"] .strategy-toggle-btn   { color: rgba(0, 0, 0, 0.6); }
+[data-theme="light"] .strategy-toggle-btn:hover { color: rgba(0, 0, 0, 0.9); }
+[data-theme="light"] .strategy-subtitle     { color: #1a1a1a; }

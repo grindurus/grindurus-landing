@@ -1,6 +1,6 @@
-import Header from './components/Header'
-import Footer from './components/Footer'
-import Landing from './pages/Landing'
+import Header from './components/layout/Header/Header'
+import Footer from './components/layout/Footer/Footer'
+import Landing from './pages/Landing/Landing'
 import './App.css'
 
 function App() {
