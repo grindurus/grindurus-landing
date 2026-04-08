@@ -1,75 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ── Base resets ── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
 
-  /* Theme tokens */
-  --bg-primary: #000000;
-  --bg-secondary: #1a1a1a;
-  --bg-tertiary: #222222;
-  --bg-card: #1a1a1a;
-  --border-color: #333333;
-  --border-light: #444444;
-  --text-primary: rgba(255, 255, 255, 0.87);
-  --text-secondary: #888888;
-  --text-muted: #666666;
+  html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
 
-  /* Brand tokens */
-  --color-brand-pink: #ff69b4;
-  --color-brand-red: #ff1493;
-  --color-brand-gradient: linear-gradient(90deg, #ff69b4, #ff1493);
+  body {
+    @apply min-h-screen min-w-[320px] bg-black text-white/[.87] antialiased;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  [data-theme="light"] body {
+    @apply bg-white text-[#1a1a1a];
+  }
 }
 
-[data-theme="dark"] {
-  color-scheme: dark;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
+/* ── Utilities that need raw CSS (offset-path, CSS custom props) ── */
+@layer utilities {
+  /* Orbit ring: requires CSS Motion Path spec */
+  .orbit-icon {
+    offset-path: var(--orbit-path);
+    offset-anchor: 50% 50%;
+    offset-rotate: auto;
+  }
+
+  /* Shimmer background size for animated gradient text */
+  .bg-shimmer-size { background-size: 300% 100%; }
+
+  /* Marquee mask */
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  /* Particle needs --mid-x / --mid-y / --end-x / --end-y CSS vars */
+  .particle-anim {
+    animation: particle-fly 3s ease-in-out forwards;
+  }
 }
 
-[data-theme="light"] {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f5;
-  --bg-tertiary: #eeeeee;
-  --bg-card: #ffffff;
-  --border-color: #dddddd;
-  --border-light: #cccccc;
-  --text-primary: #1a1a1a;
-  --text-secondary: #666666;
-  --text-muted: #888888;
-
-  color-scheme: light;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
+/* ── Global keyframes (referenced via Tailwind animation utilities) ── */
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% / 4)); }
 }
 
-html {
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
+@keyframes orbit-infinity {
+  to { offset-distance: 100%; }
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+@keyframes particle-fly {
+  0% {
+    transform: translate(-50%,-50%) translate(0,0) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(-50%,-50%) translate(var(--mid-x),var(--mid-y)) scale(0.9);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%,-50%) translate(var(--end-x),var(--end-y)) scale(0.4);
+    opacity: 0;
+  }
 }
 
-#root {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
+/* Orbit fallback for browsers without offset-path */
+@supports not (offset-path: path('M 0,0')) {
+  @keyframes orbit-infinity {
+    0%, 100% { transform: translate(-50%,-50%) translate(46vw,0); }
+    12.5%    { transform: translate(-50%,-50%) translate(32vw,18vh); }
+    25%      { transform: translate(-50%,-50%) translate(0,0); }
+    37.5%    { transform: translate(-50%,-50%) translate(-32vw,-18vh); }
+    50%      { transform: translate(-50%,-50%) translate(-46vw,0); }
+    62.5%    { transform: translate(-50%,-50%) translate(-32vw,18vh); }
+    75%      { transform: translate(-50%,-50%) translate(0,0); }
+    87.5%    { transform: translate(-50%,-50%) translate(32vw,-18vh); }
+  }
 }
