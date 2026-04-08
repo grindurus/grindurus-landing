@@ -1,7 +1,0 @@
-/* Landing page wrapper only — section styles live in their own component folders */
-.landing {
-  position: relative;
-  min-height: calc(100vh - 74px);
-  background: var(--bg-primary);
-  margin: 0 -2rem -2rem -2rem;
-}

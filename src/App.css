@@ -6,8 +6,12 @@
 
 .App-main {
   flex: 1;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 2rem 2rem 2rem;
   width: 100%;
+}
+
+/* Landing page wrapper — applied to App-main on the single page */
+.App-main.landing {
+  position: relative;
+  min-height: calc(100vh - 74px);
+  background: var(--bg-primary);
 }
