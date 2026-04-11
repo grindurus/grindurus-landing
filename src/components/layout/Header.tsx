@@ -1,4 +1,3 @@
-import { ThemeToggle } from '../ui/ThemeToggle'
 import { APP_URL } from '../../config'
 import logo from '@/assets/logo.png'
 
@@ -26,7 +25,6 @@ function Header() {
           >
             Open App
           </a>
-          <ThemeToggle />
         </div>
       </div>
     </header>

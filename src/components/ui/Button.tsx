@@ -10,7 +10,7 @@ interface ButtonProps {
 
 const sizeClasses = {
   sm: 'text-sm px-6 py-2.5',
-  md: 'text-[0.95rem] px-8 py-3.5',
+  md: 'text-[1rem] px-8 py-3.5',
   lg: 'text-base px-10 py-4',
 }
 
@@ -21,7 +21,7 @@ export function Button({ href, children, size = 'lg', className = '', innerRef }
       href={href}
       className={[
         'inline-block no-underline font-mono font-bold text-white rounded-xl',
-        'transition-all duration-200 hover:scale-105 hover:shadow-[0_8px_30px_rgba(255,105,180,0.5)] hover:text-white',
+        'transition-all duration-200 hover:opacity-80',
         sizeClasses[size],
         className,
       ].join(' ')}

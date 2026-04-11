@@ -29,19 +29,13 @@ export default {
           '100%': { transform: 'translateX(calc(-100% / 4))' },
         },
         'orbit-infinity': {
-          to: { offsetDistance: '100%' },
-        },
-        'particle-fly': {
-          '0%':   { transform: 'translate(-50%,-50%) translate(0,0) scale(1)', opacity: '1' },
-          '40%':  { transform: 'translate(-50%,-50%) translate(var(--mid-x),var(--mid-y)) scale(0.9)', opacity: '0.9' },
-          '100%': { transform: 'translate(-50%,-50%) translate(var(--end-x),var(--end-y)) scale(0.4)', opacity: '0' },
+          to: { marginLeft: '0' },   /* placeholder – animation driven by RAF now */
         },
       },
       animation: {
         shimmer:          'shimmer 8s ease-in-out infinite',
         'marquee-scroll': 'marquee-scroll 30s linear infinite',
-        'orbit-infinity': 'orbit-infinity 80s linear infinite',
-        'particle-fly':   'particle-fly 3s ease-in-out forwards',
+        'orbit-infinity': 'orbit-infinity 0s linear',  /* driven by RAF, not CSS */
       },
       minHeight: {
         '70vh': '70vh',

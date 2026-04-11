@@ -24,15 +24,8 @@
   }
 }
 
-/* ── Utilities that need raw CSS (offset-path, CSS custom props) ── */
+/* ── Utilities that need raw CSS (CSS custom props, masks) ── */
 @layer utilities {
-  /* Orbit ring: requires CSS Motion Path spec */
-  .orbit-icon {
-    offset-path: var(--orbit-path);
-    offset-anchor: 50% 50%;
-    offset-rotate: auto;
-  }
-
   /* Shimmer background size for animated gradient text */
   .bg-shimmer-size { background-size: 300% 100%; }
 
@@ -40,11 +33,6 @@
   .marquee-mask {
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  }
-
-  /* Particle needs --mid-x / --mid-y / --end-x / --end-y CSS vars */
-  .particle-anim {
-    animation: particle-fly 3s ease-in-out forwards;
   }
 }
 
@@ -57,37 +45,4 @@
 @keyframes marquee-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(calc(-100% / 4)); }
-}
-
-@keyframes orbit-infinity {
-  to { offset-distance: 100%; }
-}
-
-@keyframes particle-fly {
-  0% {
-    transform: translate(-50%,-50%) translate(0,0) scale(1);
-    opacity: 1;
-  }
-  40% {
-    transform: translate(-50%,-50%) translate(var(--mid-x),var(--mid-y)) scale(0.9);
-    opacity: 0.9;
-  }
-  100% {
-    transform: translate(-50%,-50%) translate(var(--end-x),var(--end-y)) scale(0.4);
-    opacity: 0;
-  }
-}
-
-/* Orbit fallback for browsers without offset-path */
-@supports not (offset-path: path('M 0,0')) {
-  @keyframes orbit-infinity {
-    0%, 100% { transform: translate(-50%,-50%) translate(46vw,0); }
-    12.5%    { transform: translate(-50%,-50%) translate(32vw,18vh); }
-    25%      { transform: translate(-50%,-50%) translate(0,0); }
-    37.5%    { transform: translate(-50%,-50%) translate(-32vw,-18vh); }
-    50%      { transform: translate(-50%,-50%) translate(-46vw,0); }
-    62.5%    { transform: translate(-50%,-50%) translate(-32vw,18vh); }
-    75%      { transform: translate(-50%,-50%) translate(0,0); }
-    87.5%    { transform: translate(-50%,-50%) translate(32vw,-18vh); }
-  }
 }
