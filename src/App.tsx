@@ -3,6 +3,10 @@ import Footer from './components/layout/Footer'
 import { HeroSection } from './components/sections/hero/HeroSection'
 import { PartnersSection } from './components/sections/partners/PartnersSection'
 import { StrategySection } from './components/sections/strategy/StrategySection'
+import { GraiProductSection } from './components/sections/product/GraiProductSection'
+import { AnnualResultsSection } from './components/sections/results/AnnualResultsSection'
+import { CalculatorCtaSection } from './components/sections/calculator/CalculatorCtaSection'
+import { InvestmentPathsSection } from './components/sections/invest/InvestmentPathsSection'
 import './index.css'
 
 function App() {
@@ -11,8 +15,12 @@ function App() {
       <Header />
       <main className="flex-1 relative bg-white dark:bg-black">
         <HeroSection />
-        <PartnersSection />
         <StrategySection />
+        <GraiProductSection />
+        <AnnualResultsSection />
+        <CalculatorCtaSection />
+        <InvestmentPathsSection />
+        <PartnersSection />
       </main>
       <Footer />
     </div>

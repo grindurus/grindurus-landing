@@ -1,0 +1,68 @@
+import { APP_URL } from '../../../config'
+
+export function InvestmentPathsSection() {
+  return (
+    <section className="w-full py-24 bg-black border-b border-black/10 dark:border-white/[0.08] relative">
+      <div className="max-w-[1280px] mx-auto px-8">
+        <div className="text-center mb-16">
+          <h2 className="font-mono font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.2] text-white mb-6">
+            Join the Ecosystem
+          </h2>
+          <p className="font-mono text-lg text-white/60 max-w-[600px] mx-auto">
+            Whether you're an individual investor looking for yield, or a protocol looking to harvest your own volatility, we have a path for you.
+          </p>
+        </div>
+
+        <div className="flex gap-8">
+          {/* Card: Retail Co-Investor */}
+          <div className="flex flex-1 flex-col bg-[#0f0f0f] border border-white/10 rounded-3xl p-8 relative overflow-hidden group hover:border-brand-pink/50 transition-colors duration-500">
+            {/* Glow effect on hover */}
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-pink/0 to-brand-pink/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            
+            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8">
+              <span className="text-3xl">👥</span>
+            </div>
+            
+            <h3 className="font-mono font-bold text-3xl text-white mb-4">
+              Retail Co-Investor
+            </h3>
+            <p className="font-mono text-white/60 mb-10 leading-relaxed flex-1">
+              You don't need millions to capture institutional yield. Invest in the general crowdfunding pool to become a "co-investor" and start earning from the exact same automated strategies powering the GrindURUS network.
+            </p>
+            
+            <a
+              href={`${APP_URL}/grinders`}
+              className="inline-flex items-center justify-center font-mono font-bold text-sm text-black bg-white px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105"
+            >
+              Enter Crowdfunding Pool
+            </a>
+          </div>
+
+          {/* Card: Private B2B / Partners */}
+          <div className="flex flex-1 flex-col bg-[#050505] border border-white/10 rounded-3xl p-8 relative overflow-hidden group hover:border-brand-red/50 transition-colors duration-500">
+            {/* Glow effect on hover */}
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-red/0 to-brand-red/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            
+            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8">
+              <span className="text-3xl">🏢</span>
+            </div>
+            
+            <h3 className="font-mono font-bold text-3xl text-white mb-4">
+              Private Client
+            </h3>
+            <p className="font-mono text-white/60 mb-10 leading-relaxed flex-1">
+              If you have a token project or a large treasury, we can market make for you separately. Become a private client and deploy our volatility harvesting infrastructure specifically on your native asset pairs to stabilize price action and grow treasury depth.
+            </p>
+            
+            <a
+              href="mailto:contact@grindurus.xyz" // fallback or direct link to contact logic
+              className="inline-flex items-center justify-center font-mono font-bold text-sm text-white border border-white/20 hover:border-brand-red px-8 py-4 rounded-xl transition-all duration-300 hover:bg-white/5"
+            >
+              Become a Private Client
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
