@@ -4,7 +4,7 @@ export function AnnualResultsSection() {
       <div className="max-w-[1280px] mx-auto px-8">
         <div className="text-center">
           <h2 className="font-mono font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.2] text-white mb-8">
-          Strategy Performance
+          Performance
           </h2>
           {/* <p className="font-mono text-[1.1rem] text-white/60 mb-16 max-w-[600px] mx-auto">
             See the difference. While "buy and hold" leaves you exactly where the market decides, our automated strategies continuously extract value.
@@ -21,7 +21,7 @@ export function AnnualResultsSection() {
               <div className="pointer-events-none absolute left-0 top-0 z-10 flex items-center gap-2.5">
                 <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-white/40" aria-hidden />
                 <span className="font-mono text-sm font-medium tracking-wide text-white/55 md:text-base">
-                  Locked yield
+                  Locked Yield
                 </span>
               </div>
               <svg
@@ -71,7 +71,7 @@ export function AnnualResultsSection() {
                   aria-hidden
                 />
                 <span className="font-mono text-sm font-medium tracking-wide text-brand-pink md:text-base">
-                  Volatility yield
+                  Volatility Yield
                 </span>
               </div>
               <svg
