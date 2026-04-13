@@ -1,5 +1,74 @@
+import { useEffect, useRef, useState } from 'react'
 import { APP_URL } from '../../../config'
 import { Button } from '../../ui/Button'
+
+const YIELD_MIN = 10
+const YIELD_MAX = 60
+const HOLD_MS = 3000
+const RECALC_MS = 300
+
+function AnimatedProjectedYield() {
+  const [value, setValue] = useState(() => YIELD_MIN + Math.random() * (YIELD_MAX - YIELD_MIN))
+  const timeoutRef = useRef<number | null>(null)
+  const rafRef = useRef(0)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setValue(35)
+      return
+    }
+
+    let cancelled = false
+    const randomBetween = () => YIELD_MIN + Math.random() * (YIELD_MAX - YIELD_MIN)
+
+    const clearTimers = () => {
+      if (timeoutRef.current !== null) {
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
+      }
+      cancelAnimationFrame(rafRef.current)
+    }
+
+    const scheduleHoldThenRecalc = (heldValue: number) => {
+      setValue(heldValue)
+      timeoutRef.current = window.setTimeout(() => {
+        if (cancelled) return
+        startRecalc()
+      }, HOLD_MS)
+    }
+
+    const startRecalc = () => {
+      const start = performance.now()
+      const tick = (now: number) => {
+        if (cancelled) return
+        const elapsed = now - start
+        if (elapsed >= RECALC_MS) {
+          scheduleHoldThenRecalc(randomBetween())
+          return
+        }
+        setValue(randomBetween())
+        rafRef.current = requestAnimationFrame(tick)
+      }
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    timeoutRef.current = window.setTimeout(() => {
+      if (cancelled) return
+      startRecalc()
+    }, HOLD_MS)
+
+    return () => {
+      cancelled = true
+      clearTimers()
+    }
+  }, [])
+
+  return (
+    <span className="block font-mono font-black text-4xl text-white tabular-nums drop-shadow-[0_0_15px_rgba(255,105,180,0.5)]">
+      +{value.toFixed(1)}%
+    </span>
+  )
+}
 
 export function CalculatorCtaSection() {
   return (
@@ -11,9 +80,9 @@ export function CalculatorCtaSection() {
           {/* Left Content */}
           <div className="flex flex-col items-start text-left">
             <h2 className="font-mono font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.1] text-white mb-6">
-              Test any asset yourself <br className="hidden md:block" />
+              Backtest any asset yourself <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink to-[#ff1493]">
-                for just $5
+                for just $1
               </span>
             </h2>
 
@@ -65,10 +134,10 @@ export function CalculatorCtaSection() {
               {/* Output Highlight */}
               <div className="relative bg-gradient-to-tr from-brand-pink/20 to-black border border-brand-pink/30 rounded-xl p-6 text-center overflow-hidden">
                 <div className="absolute -inset-[100%] bg-gradient-to-r from-transparent via-white/10 to-transparent rotate-45 animate-[shimmer_3s_infinite]"></div>
-                <span className="block font-sans text-xs text-brand-pink uppercase tracking-widest font-bold mb-2">Projected Yield</span>
-                <span className="block font-mono font-black text-4xl text-white drop-shadow-[0_0_15px_rgba(255,105,180,0.5)]">
-                  +42.8%
+                <span className="block font-sans text-xs text-brand-pink uppercase tracking-widest font-bold mb-2">
+                  Projected Annual Yield
                 </span>
+                <AnimatedProjectedYield />
               </div>
             </div>
           </div>

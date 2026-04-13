@@ -17,7 +17,7 @@ export function StrategySection() {
               Market price volatility is an opportunity. 
             </p>
             <p className="m-0 mt-3 text-balance sm:mt-3.5 md:mt-4">
-              You don’t need to predict the market.
+              No need to predict the market.
             </p>
             <p className="m-0 mt-3 text-balance sm:mt-3.5 md:mt-4">
               Your capital works in both modes.
@@ -52,6 +52,15 @@ export function StrategySection() {
 
               {/* Graphic */}
               <div className="w-full h-40 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-center p-6 relative">
+                <div className="pointer-events-none absolute bottom-2 left-3 z-10 flex items-center gap-2 sm:bottom-2.5 sm:left-4 sm:gap-2.5">
+                  <span
+                    className="block h-0 w-4 shrink-0 border-0 border-t-2 border-dashed border-white/50 sm:w-5"
+                    aria-hidden
+                  />
+                  <span className="font-mono text-[10px] font-medium tracking-wide text-white/55 sm:text-xs">
+                    decision curve
+                  </span>
+                </div>
                 <svg viewBox="0 0 120 70" className="w-full h-full overflow-visible">
                   {/* Grid Lines */}
                   <line x1="0" y1="35" x2="120" y2="35" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="2 2" />
@@ -97,6 +106,15 @@ export function StrategySection() {
 
               {/* Graphic */}
               <div className="w-full h-40 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-center p-6 relative">
+                <div className="pointer-events-none absolute bottom-2 left-3 z-10 flex items-center gap-2 sm:bottom-2.5 sm:left-4 sm:gap-2.5">
+                  <span
+                    className="block h-0 w-4 shrink-0 border-0 border-t-2 border-dashed border-white/50 sm:w-5"
+                    aria-hidden
+                  />
+                  <span className="font-mono text-[10px] font-medium tracking-wide text-white/55 sm:text-xs">
+                    decision curve
+                  </span>
+                </div>
                 <svg viewBox="0 0 120 70" className="w-full h-full overflow-visible">
                   {/* Grid Lines */}
                   <line x1="0" y1="35" x2="120" y2="35" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="2 2" />

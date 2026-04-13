@@ -1,6 +1,6 @@
 const SOCIAL_LINKS = [
   { href: 'https://x.com/grindurus', icon: 'x', label: 'X' },
-  { href: 'https://github.com/triplepaniclabs', icon: 'github', label: 'GitHub' },
+  { href: 'https://github.com/grindurus', icon: 'github', label: 'GitHub' },
   { href: 'https://docs.grindurus.xyz', icon: 'docs', label: 'Documentation' },
 ]
 
@@ -41,12 +41,61 @@ function SocialIcons() {
   )
 }
 
+const FOOTER_CHART_FILL_ID = 'grindurus-footer-yield-fill'
+const FOOTER_CHART_STROKE_ID = 'grindurus-footer-yield-stroke'
+
 export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-black border-t border-black/15 dark:border-white/15 py-10 mt-auto">
-      <div className="max-w-[1280px] mx-auto px-8 flex justify-end items-end">
-        <div className="flex flex-col items-end gap-3">
-          <p className="font-mono text-sm text-[#1a1a1a]/85 dark:text-white/85 m-0">© GrindURUS 2026. All rights reserved.</p>
+    <footer className="relative mt-auto overflow-hidden border-t border-black/15 bg-white py-10 dark:border-white/15 dark:bg-black">
+      <div
+        className="pointer-events-none absolute bottom-0 left-0 hidden h-[300px] w-full xl:block"
+        aria-hidden
+      >
+        <svg viewBox="0 0 1200 300" className="h-full w-full" fill="none" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id={FOOTER_CHART_FILL_ID} x1="600" y1="40" x2="600" y2="300" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#ff69b4" stopOpacity="0.12" />
+              <stop offset="1" stopColor="#ff1493" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id={FOOTER_CHART_STROKE_ID} x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#ff69b4" stopOpacity="0.5" />
+              <stop offset="1" stopColor="#ff1493" stopOpacity="0.5" />
+            </linearGradient>
+          </defs>
+          <line x1="0" y1="95" x2="1200" y2="95" className="stroke-black/[0.05] dark:stroke-white/[0.06]" strokeWidth="1" />
+          <line x1="0" y1="165" x2="1200" y2="165" className="stroke-black/[0.05] dark:stroke-white/[0.06]" strokeWidth="1" />
+          <line x1="0" y1="235" x2="1200" y2="235" className="stroke-black/[0.05] dark:stroke-white/[0.06]" strokeWidth="1" />
+          <path
+            d="M0 228 C200 218 360 198 540 168 S880 98 1200 70 L1200 300 L0 300 Z"
+            fill={`url(#${FOOTER_CHART_FILL_ID})`}
+          />
+          <path
+            d="M0 228 C200 218 360 198 540 168 S880 98 1200 70"
+            stroke={`url(#${FOOTER_CHART_STROKE_ID})`}
+            strokeLinecap="round"
+            strokeWidth="2"
+          />
+          <path
+            d="M0 198 C260 208 420 178 640 188 S920 158 1200 145"
+            className="stroke-black/[0.14] dark:stroke-white/[0.12]"
+            strokeDasharray="5 6"
+            strokeLinecap="round"
+            strokeWidth="1.5"
+          />
+        </svg>
+      </div>
+
+      <div className="relative z-10 mx-auto flex max-w-[1280px] flex-col items-end gap-8 px-8 sm:flex-row sm:items-end sm:justify-between">
+        <a href="/" className="order-2 shrink-0 self-start no-underline sm:order-1 sm:self-end" aria-label="GrindURUS home">
+          <span
+            className="inline-block whitespace-nowrap font-mono text-3xl font-semibold uppercase tracking-wide text-transparent bg-shimmer-size bg-clip-text animate-shimmer sm:text-4xl md:text-5xl"
+            style={{ backgroundImage: 'linear-gradient(90deg, #ff69b4, #ffffff, #ff1493, #ffffff, #ff69b4)' }}
+          >
+            GrindURUS
+          </span>
+        </a>
+        <div className="order-1 flex flex-col items-end gap-3 sm:order-2">
+          <p className="m-0 font-mono text-sm text-[#1a1a1a]/85 dark:text-white/85">© GrindURUS 2026. All rights reserved.</p>
           <SocialIcons />
         </div>
       </div>

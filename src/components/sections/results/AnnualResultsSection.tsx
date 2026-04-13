@@ -15,9 +15,15 @@ export function AnnualResultsSection() {
         <div className="flex flex-col gap-8 lg:flex-row">
           {/* Standard — slow, noisy uptrend */}
           <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-8">
-            <h3 className="mb-1 font-mono text-sm font-bold uppercase tracking-widest text-white/50">Standard</h3>
+            <h3 className="mb-1 font-mono text-sm font-bold uppercase tracking-widest text-white/50">Standard Yield</h3>
             <span className="mb-6 font-mono text-2xl font-black text-white/80 md:text-3xl">Buy &amp; Hold</span>
             <div className="relative mt-auto min-h-[200px] w-full flex-1">
+              <div className="pointer-events-none absolute left-0 top-0 z-10 flex items-center gap-2.5">
+                <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-white/40" aria-hidden />
+                <span className="font-mono text-sm font-medium tracking-wide text-white/55 md:text-base">
+                  Locked yield
+                </span>
+              </div>
               <svg
                 className="h-full w-full min-h-[200px]"
                 viewBox="0 0 400 220"
@@ -33,14 +39,15 @@ export function AnnualResultsSection() {
                   </linearGradient>
                 </defs>
                 <line x1="0" y1="55" x2="400" y2="55" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-                <line x1="0" y1="110" x2="400" y2="110" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+                <line x1="0" y1="110" x2="400" y2="110" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
                 <line x1="0" y1="165" x2="400" y2="165" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+                <line x1="200" y1="0" x2="200" y2="220" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
                 <path
-                  d="M0 198 L28 192 L52 188 L76 182 L100 186 L124 172 L148 178 L172 162 L196 168 L220 152 L244 158 L268 142 L292 148 L316 132 L340 128 L364 118 L388 108 L400 98 L400 220 L0 220 Z"
+                  d="M0 86 C70 84 130 98 200 110 C235 118 258 178 305 182 C340 185 372 118 400 68 L400 220 L0 220 Z"
                   fill="url(#annual-mock-hold-area)"
                 />
                 <path
-                  d="M0 198 L28 192 L52 188 L76 182 L100 186 L124 172 L148 178 L172 162 L196 168 L220 152 L244 158 L268 142 L292 148 L316 132 L340 128 L364 118 L388 108 L400 98"
+                  d="M0 86 C70 84 130 98 200 110 C235 118 258 178 305 182 C340 185 372 118 400 68"
                   stroke="rgba(255,255,255,0.45)"
                   strokeWidth="2.5"
                   strokeLinecap="round"
@@ -54,10 +61,19 @@ export function AnnualResultsSection() {
           <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-brand-pink/30 bg-[#111] p-8 shadow-[0_0_40px_rgba(255,105,180,0.05)]">
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-pink/10 to-transparent" />
             <h3 className="relative z-10 mb-1 font-mono text-sm font-bold uppercase tracking-widest text-brand-pink">
-              GrindURUS Protocol
+              GrindURUS Protocol Yield
             </h3>
             <span className="relative z-10 mb-6 font-mono text-2xl font-black text-white md:text-3xl">Buy Low, Sell High</span>
             <div className="relative z-10 mt-auto min-h-[200px] w-full flex-1">
+              <div className="pointer-events-none absolute left-0 top-0 z-10 flex items-center gap-2.5">
+                <span
+                  className="h-2.5 w-2.5 shrink-0 rounded-full bg-brand-pink shadow-[0_0_8px_rgba(255,105,180,0.65)]"
+                  aria-hidden
+                />
+                <span className="font-mono text-sm font-medium tracking-wide text-brand-pink md:text-base">
+                  Volatility yield
+                </span>
+              </div>
               <svg
                 className="h-full w-full min-h-[200px]"
                 viewBox="0 0 400 220"
