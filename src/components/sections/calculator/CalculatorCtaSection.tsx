@@ -6,10 +6,11 @@ import { Description } from '@/components/ui/Description'
 
 const YIELD_MIN = 10
 const YIELD_MAX = 60
+const INITIAL_USDC = 5_000
 const HOLD_MS = 3000
 const RECALC_MS = 300
 
-function AnimatedProjectedYield() {
+function useAnimatedYield() {
   const [value, setValue] = useState(() => YIELD_MIN + Math.random() * (YIELD_MAX - YIELD_MIN))
   const timeoutRef = useRef<number | null>(null)
   const rafRef = useRef(0)
@@ -65,18 +66,43 @@ function AnimatedProjectedYield() {
     }
   }, [])
 
+  return value
+}
+
+function OutputStats() {
+  const yield_ = useAnimatedYield()
+  const finalUsdc = INITIAL_USDC * (1 + yield_ / 100)
+  const finalFormatted = finalUsdc.toLocaleString('en-US', { maximumFractionDigits: 0 })
+
   return (
-    <span className="block font-mono font-black text-4xl text-white tabular-nums drop-shadow-[0_0_15px_rgba(255,105,180,0.5)]">
-      +{value.toFixed(1)}%
-    </span>
+    <div className="bg-black border border-white/10 rounded-xl px-4 py-4 flex items-stretch divide-x divide-white/10">
+      {/* Yield % */}
+      <div className="flex-1 flex flex-col items-center text-center pr-4">
+        <span className="font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-1.5">
+          Annual Yield
+        </span>
+        <span className="font-mono font-black text-2xl text-[#4ade80] tabular-nums leading-none">
+          +{yield_.toFixed(1)}%
+        </span>
+      </div>
+      {/* Final amount */}
+      <div className="flex-1 flex flex-col items-center text-center pl-4">
+        <span className="font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-1.5">
+          Final Amount
+        </span>
+        <span className="font-mono font-black text-2xl text-white tabular-nums leading-none">
+          ${finalFormatted}
+        </span>
+      </div>
+    </div>
   )
 }
 
 export function CalculatorCtaSection() {
   return (
-    <section className="w-full py-14 md:py-16 bg-black border-b border-black/10 dark:border-white/[0.08] relative">
-      <div className="max-w-[1280px] mx-auto px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center relative z-10">
+    <section className="w-full py-12 md:py-14 lg:py-16 bg-black relative">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center relative z-10">
 
           {/* Left Content */}
           <div className="flex flex-col items-start text-left">
@@ -92,56 +118,69 @@ export function CalculatorCtaSection() {
             </Description>
 
             <Button href={`${APP_URL}/calculator`} size="lg">
-              Launch Volatility Calculator
+              Launch Calculator
             </Button>
           </div>
 
           {/* Right Graphic: Mock Calculator Widget */}
-          <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-auto lg:h-[450px] flex items-center justify-center">
-            {/* Mock UI Panel */}
-            <div className="relative w-full max-w-[380px] bg-[#111111] border border-white/10 rounded-2xl p-6 shadow-[0_30px_60px_rgba(0,0,0,0.6)] backdrop-blur-xl z-10">
-              <div className="flex justify-between items-center mb-8">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                  <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                  <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                </div>
-                <span className="font-mono text-xs text-white/40 tracking-wider">CALC_ENGINE_V2</span>
+          <div className="relative flex items-center justify-center">
+            <div className="bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 flex flex-col gap-6 w-full">
+
+              {/* Panel header */}
+              <div className="flex items-center justify-between">
+                <span className="block font-sans text-xs text-white/40 uppercase tracking-widest font-bold">
+                  Calculator
+                </span>
+                <span className="font-mono text-xs text-white/25 tracking-wider">CALC_ENGINE_V2</span>
               </div>
 
-              <div className="space-y-4 mb-8">
-                {/* Mock Input 1 */}
-                <div className="bg-black border border-white/5 rounded-xl p-4 flex justify-between items-center group hover:border-brand-pink/30 transition-colors">
-                  <span className="font-sans text-sm text-white/50">Asset Pair</span>
-                  <span className="font-mono font-bold text-white group-hover:text-brand-pink transition-colors">SOL / USDC</span>
+              {/* Asset Pair */}
+              <div>
+                <span className="block font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-2">
+                  Asset Pair
+                </span>
+                <div className="bg-black border border-white/10 rounded-xl px-4 py-3 flex items-center justify-between hover:border-brand-pink/30 transition-colors duration-150 group">
+                  <span className="font-sans text-sm text-white/50">Pair</span>
+                  <span className="font-mono font-bold text-white group-hover:text-brand-pink transition-colors duration-150">SOL / USDC</span>
                 </div>
-                {/* Mock Input 2 */}
-                <div className="bg-black border border-white/5 rounded-xl p-4 flex justify-between items-center group hover:border-brand-pink/30 transition-colors">
-                  <span className="font-sans text-sm text-white/50">Timeframe</span>
-                  <span className="font-mono font-bold text-white">30 Days</span>
+              </div>
+
+              {/* Timeframe */}
+              <div>
+                <span className="block font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-2">
+                  Timeframe
+                </span>
+                <div className="bg-black border border-white/10 rounded-xl px-4 py-3 flex items-center justify-between hover:border-brand-pink/30 transition-colors duration-150 group">
+                  <span className="font-sans text-sm text-white/50">Period</span>
+                  <span className="font-mono font-bold text-white group-hover:text-brand-pink transition-colors duration-150">30 Days</span>
                 </div>
-                {/* Mock Input 3 */}
-                <div className="bg-black border border-white/5 rounded-xl p-4 flex justify-between items-center gap-4 relative overflow-hidden">
-                  <span className="font-sans text-sm text-white/50 shrink-0">Initial Capital</span>
-                  <div className="font-mono font-bold text-white text-right leading-snug min-w-0">
+              </div>
+
+              {/* Initial Capital */}
+              <div>
+                <span className="block font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-2">
+                  Initial Capital
+                </span>
+                <div className="bg-black border border-white/10 rounded-xl px-4 py-3 flex items-center justify-between relative overflow-hidden">
+                  <span className="font-sans text-sm text-white/50">Amount</span>
+                  <div className="font-mono font-bold text-white text-right leading-snug">
                     <span className="block">25 SOL</span>
-                    <span className="block text-white/70 text-[0.8125rem] font-semibold">5,000 USDC</span>
+                    <span className="block text-white/50 text-[0.8125rem] font-semibold">$5,000</span>
                   </div>
                   <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-brand-pink to-transparent w-full"></div>
                 </div>
               </div>
 
-              {/* Output Highlight */}
-              <div className="relative bg-gradient-to-tr from-brand-pink/20 to-black border border-brand-pink/30 rounded-xl p-6 text-center overflow-hidden">
-                <div className="absolute -inset-[100%] bg-gradient-to-r from-transparent via-white/10 to-transparent rotate-45 animate-[shimmer_3s_infinite]"></div>
-                <span className="block font-sans text-xs text-brand-pink uppercase tracking-widest font-bold mb-2">
-                  Projected Annual Yield
+              {/* Output Stats */}
+              <div>
+                <span className="block font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-2">
+                  Projected Results
                 </span>
-                <AnimatedProjectedYield />
+                <OutputStats />
               </div>
+
             </div>
           </div>
-
         </div>
       </div>
     </section>

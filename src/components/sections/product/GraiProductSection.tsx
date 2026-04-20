@@ -50,10 +50,10 @@ export function GraiProductSection() {
   }
 
   return (
-    <section className="relative w-full py-14 md:py-16 bg-black border-b border-black/10 dark:border-white/[0.08]">
-      <div className="flex justify-between max-w-[1280px] mx-auto px-8">
+    <section className="relative w-full py-12 md:py-16 bg-black">
+      <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-8 max-w-[1280px] mx-auto px-4 sm:px-8">
         {/* Left: Text Content */}
-        <div className="flex min-w-0 max-w-full flex-col items-start overflow-x-auto text-left">
+        <div className="flex min-w-0 max-w-full flex-col items-start text-left">
           <Title className="flex flex-col gap-2">
             <div className="text-white">Onchain Foundation.</div>
             <div className="text-brand-pink">Tokenized Volatility.</div>
@@ -72,7 +72,7 @@ export function GraiProductSection() {
         </div>
 
         {/* Right: chain carousel + GRAI */}
-        <div className="relative flex min-h-[400px] min-w-[400px] flex-col items-center justify-center gap-5">
+        <div className="relative flex min-h-[340px] w-full md:min-w-[400px] md:max-w-[440px] flex-col items-center justify-center gap-5">
           <div className="flex w-full max-w-[380px] shrink-0 flex-col items-center px-2">
             <p className="mb-2 text-center font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/40">
               Network

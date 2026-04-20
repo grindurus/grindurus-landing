@@ -17,7 +17,7 @@ import logo from '@/assets/logo.png'
  * Positions updated every frame via requestAnimationFrame, so it works on all
  * browsers without CSS offset-path. ResizeObserver keeps it adaptive.
  */
-export function OrbitRing() {
+export function OrbitRing({ contained = false }: { contained?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number>(0)
   const anglesRef = useRef<number[]>([])
@@ -99,7 +99,7 @@ export function OrbitRing() {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 pointer-events-none"
+      className={contained ? 'relative w-full h-full pointer-events-none' : 'absolute inset-0 pointer-events-none'}
       aria-hidden
     >
       {/* ── Background animation tokens loop (opacity-50 pushes them back visually) ── */}

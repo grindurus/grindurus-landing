@@ -1,12 +1,13 @@
 import { Title } from "@/components/ui/Title"
+import { SubTitle } from "@/components/ui/SubTitle"
 import { Description } from '@/components/ui/Description'
 
 export function StrategySection() {
   return (
-    <section className="w-full pt-24 pb-12 md:pb-14 bg-black border-b border-black/10 dark:border-white/[0.08] relative overflow-hidden">
-      <div className="max-w-[1280px] mx-auto px-8 relative z-10">
+    <section className="w-full pt-16 pb-10 md:pt-24 md:pb-12 bg-black relative overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
         {/* Section heading */}
-        <div className="text-center mb-16 md:mb-24">
+        <div className="text-center mb-10 md:mb-16 md:mb-24">
           <Title>Dual-Sided Strategy</Title>
           <Description>
             Market price volatility is an opportunity. No need to predict the market. <br></br>Your capital works in both modes.
@@ -14,7 +15,7 @@ export function StrategySection() {
         </div>
 
         {/* Strategy Cards Grid */}
-        <div className="flex gap-8 mb-20">
+        <div className="flex flex-col sm:flex-row gap-6 md:gap-8 mb-12 md:mb-20">
 
           {/* Card 1: Buy Low, Sell High */}
           <div className="flex-1 bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 relative overflow-hidden group hover:border-brand-pink/30 hover:shadow-[0_20px_60px_rgba(255,105,180,0.1)] transition-all duration-500">
@@ -27,10 +28,9 @@ export function StrategySection() {
                 DIRECT MODE
               </div>
 
-              <h3 className="font-mono text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-pink mb-6">
+              <SubTitle className="mb-6">
                 Buy Low, Sell High
-              </h3>
-
+              </SubTitle>
               <Description className="mb-10">
                 Use USDC to buy dips and sell rallies.<br></br>
                 Result: Your USDC grows.
@@ -77,10 +77,9 @@ export function StrategySection() {
                 INVERSE MODE
               </div>
 
-              <h3 className="font-mono text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-red mb-6">
+              <SubTitle className="mb-6">
                 Sell High, Buy Low
-              </h3>
-
+              </SubTitle>
               <Description className="mb-10">
                 Sell peaks and rebuy dips.<br></br>
                 Result: You accumulate more SOL

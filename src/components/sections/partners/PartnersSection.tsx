@@ -10,8 +10,8 @@ export function PartnersSection() {
   ]
 
   return (
-    <section className="py-24 border-b border-black/10 dark:border-white/[0.08] overflow-hidden bg-black">
-      <div className="max-w-[1280px] mx-auto px-8">
+    <section className="py-14 md:py-24 overflow-hidden bg-black">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Title className="text-center mb-6">Integrated With</Title>
       </div>
       <div className="overflow-hidden marquee-mask">

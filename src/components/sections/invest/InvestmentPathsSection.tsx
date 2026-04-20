@@ -1,19 +1,20 @@
 import { APP_URL } from '../../../config'
 import { Title } from "@/components/ui/Title"
 import { Description } from '@/components/ui/Description'
+import { SubTitle } from '@/components/ui/SubTitle'
 
 export function InvestmentPathsSection() {
   return (
-    <section className="w-full py-24 bg-black border-b border-black/10 dark:border-white/[0.08] relative">
-      <div className="max-w-[1280px] mx-auto px-8">
-        <div className="text-center mb-16">
+    <section className="w-full py-16 md:py-24 bg-black relative">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+        <div className="text-center mb-10 md:mb-16">
           <Title>Join the Ecosystem</Title>
           <Description className="max-w-[600px] mx-auto">
             Whether you're an individual investor looking for yield, or a protocol looking to harvest your own volatility, we have a path for you.
           </Description>
         </div>
 
-        <div className="flex gap-8">
+        <div className="flex flex-col sm:flex-row gap-6 md:gap-8">
           {/* Card: Retail Co-Investor */}
           <div className="flex flex-1 flex-col bg-[#0f0f0f] border border-white/10 rounded-3xl p-8 relative overflow-hidden group hover:border-brand-pink/50 transition-colors duration-500">
             {/* Glow effect on hover */}
@@ -23,9 +24,9 @@ export function InvestmentPathsSection() {
               <span className="text-3xl">👥</span>
             </div>
             
-            <h3 className="font-mono font-bold text-3xl text-white mb-4">
+            <SubTitle className="mb-4">
               Retail Co-Investor
-            </h3>
+            </SubTitle>
             <Description className="mb-10 flex-1">
               You don't need millions to capture institutional yield. Invest in the general crowdfunding pool to become a "co-investor" and start earning from the exact same automated strategies powering the GrindURUS network.
             </Description>
@@ -48,9 +49,9 @@ export function InvestmentPathsSection() {
               <span className="text-3xl">🏢</span>
             </div>
             
-            <h3 className="font-mono font-bold text-3xl text-white mb-4">
+            <SubTitle className="mb-4">
               Private Client
-            </h3>
+            </SubTitle>
             <Description className="mb-10 flex-1">
               If you have a token project or a large treasury, we can market take for you separately. Become a private client and deploy our volatility harvesting infrastructure specifically on your native asset pairs to stabilize price action and grow treasury depth.
             </Description>

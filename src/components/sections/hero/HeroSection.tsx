@@ -4,41 +4,63 @@ import { OrbitRing } from './OrbitRing'
 
 export function HeroSection() {
   return (
-    /*
-     * The section is the coordinate space for the animation.
-     * – overflow-hidden: keeps any icon that briefly overshoots clipped
-     * – min-h ~70–78vh: keeps orbit room while trimming excess vertical band
-     */
-    <section
-      className="relative w-full min-h-[70vh] md:min-h-[76vh] lg:min-h-[78vh] bg-black border-b border-black/10 dark:border-white/[0.08] flex items-center justify-center overflow-hidden"
-    >
-      {/* ── Background animation layer (opacity handled inside OrbitRing) ── */}
-      <OrbitRing />
-
-      {/* ── Hero text – sits above animation via z-10 ── */}
-      <div className="max-w-[1280px] mx-auto px-8 w-full flex justify-center">
-        <div className="relative z-10 text-center max-w-[800px] w-full">
-        <h1 className="font-mono font-black text-[clamp(2.5rem,6vw,5rem)] leading-[1.2]">
+    <>
+      {/* ── MOBILE layout (hidden on md+) ── */}
+      <section className="md:hidden w-full bg-black flex flex-col items-center text-center px-6 pt-16 pb-14 overflow-hidden">
+        {/* Headline */}
+        <h1 className="font-mono font-black text-[clamp(2.2rem,10vw,3rem)] leading-[1.2] mb-8">
           <span className="block text-brand-pink text-[1.2em] [text-shadow:0_0_20px_black]">GrindURUS</span>
-          <span className="block text-white dark:text-white text-[0.6em] [text-shadow:0_0_20px_black] pb-6">
+          <span className="block text-white text-[0.6em] [text-shadow:0_0_20px_black]">
             Automated Market Taking
           </span>
         </h1>
 
-        <p
-          className="
-          font-mono text-[clamp(0.95rem,2vw,1.1rem)] leading-[1.7]
-          text-white/75 dark:text-white/80 mb-10 mx-auto [text-shadow:0_0_20px_black]
-          whitespace-nowrap"
-        >
+        {/* Inline animation block */}
+        <div className="relative w-full" style={{ height: 'clamp(220px, 60vw, 340px)' }}>
+          <OrbitRing contained />
+        </div>
+
+        {/* Description + CTA */}
+        <p className="font-mono text-[clamp(0.9rem,3.5vw,1rem)] leading-[1.7] text-white/70 mt-8 mb-8 max-w-[380px]">
           Infrastructure for Turning Price Volatility into yield
         </p>
-
         <Button href={`${APP_URL}/grinders`} size="md">
           Open App
         </Button>
+      </section>
+
+      {/* ── DESKTOP layout (hidden below md) ── */}
+      <section
+        className="hidden md:flex relative w-full min-h-[90vh] bg-black items-center justify-center overflow-hidden"
+      >
+        {/* Background animation layer */}
+        <OrbitRing />
+
+        {/* Hero text – sits above animation */}
+        <div className="max-w-[1280px] mx-auto px-8 w-full flex justify-center">
+          <div className="relative z-10 text-center max-w-[800px] w-full">
+            <h1 className="font-mono font-black text-[clamp(2.5rem,6vw,5rem)] leading-[1.2]">
+              <span className="block text-brand-pink text-[1.2em] [text-shadow:0_0_20px_black]">GrindURUS</span>
+              <span className="block text-white dark:text-white text-[0.6em] [text-shadow:0_0_20px_black] pb-6">
+                Automated Market Taking
+              </span>
+            </h1>
+
+            <p
+              className="
+              font-mono text-[clamp(0.95rem,2vw,1.1rem)] leading-[1.7]
+              text-white/75 dark:text-white/80 mb-10 mx-auto [text-shadow:0_0_20px_black]
+              whitespace-nowrap"
+            >
+              Infrastructure for Turning Price Volatility into yield
+            </p>
+
+            <Button href={`${APP_URL}/grinders`} size="md">
+              Open App
+            </Button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
