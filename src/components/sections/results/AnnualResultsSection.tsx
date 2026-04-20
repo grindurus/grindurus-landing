@@ -1,14 +1,11 @@
+import { Title } from "@/components/ui/Title"
+
 export function AnnualResultsSection() {
   return (
     <section className="relative w-full py-24 bg-black border-b border-black/10 dark:border-white/[0.08]">
       <div className="max-w-[1280px] mx-auto px-8">
         <div className="text-center">
-          <h2 className="font-mono font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.2] text-white mb-8">
-          Performance
-          </h2>
-          {/* <p className="font-mono text-[1.1rem] text-white/60 mb-16 max-w-[600px] mx-auto">
-            See the difference. While "buy and hold" leaves you exactly where the market decides, our automated strategies continuously extract value.
-          </p> */}
+          <Title>Performance</Title>
         </div>
 
         {/* Comparison: mock rising charts */}

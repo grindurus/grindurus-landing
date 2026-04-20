@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { APP_URL } from '../../../config'
-import { Button } from '../../ui/Button'
+import { Button } from "@/components/ui/Button"
+import { Title } from '@/components/ui/Title'
+import { Description } from '@/components/ui/Description'
 
 const YIELD_MIN = 10
 const YIELD_MAX = 60
@@ -74,22 +76,20 @@ export function CalculatorCtaSection() {
   return (
     <section className="w-full py-14 md:py-16 bg-black border-b border-black/10 dark:border-white/[0.08] relative">
       <div className="max-w-[1280px] mx-auto px-8">
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center relative z-10">
 
           {/* Left Content */}
           <div className="flex flex-col items-start text-left">
-            <h2 className="font-mono font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.1] text-white mb-6">
-              Backtest any asset yourself <br className="hidden md:block" />
+            <Title>
+              Backtest any asset yourself <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink to-[#ff1493]">
                 for just $1
               </span>
-            </h2>
-
-            <p className="font-sans text-[1.1rem] text-white/60 mb-10 max-w-[500px] leading-relaxed">
+            </Title>
+            <Description className="mb-10 max-w-[500px]">
               Curious how much your favorite cryptocurrency fluctuates? See the true power of automated market-taking.
               The calculator reveals exactly how volatile an asset is and exactly how much our infrastructure could earn from it.
-            </p>
+            </Description>
 
             <Button href={`${APP_URL}/calculator`} size="lg">
               Launch Volatility Calculator

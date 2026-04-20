@@ -1,28 +1,16 @@
+import { Title } from "@/components/ui/Title"
+import { Description } from '@/components/ui/Description'
+
 export function StrategySection() {
   return (
     <section className="w-full pt-24 pb-12 md:pb-14 bg-black border-b border-black/10 dark:border-white/[0.08] relative overflow-hidden">
-
-      {/* Background ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-brand-pink/5 blur-[120px] rounded-full pointer-events-none"></div>
-
       <div className="max-w-[1280px] mx-auto px-8 relative z-10">
-
         {/* Section heading */}
         <div className="text-center mb-16 md:mb-24">
-          <h2 className="font-mono font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.2] text-white mb-6">
-            Dual-Sided Strategy
-          </h2>
-          <div className="mx-auto max-w-[38rem] text-center font-sans text-lg font-normal leading-[1.65] tracking-[-0.01em] text-white/75 antialiased sm:text-xl sm:leading-[1.6] md:text-2xl md:leading-[1.55]">
-            <p className="m-0 text-balance">
-              Market price volatility is an opportunity. 
-            </p>
-            <p className="m-0 mt-3 text-balance sm:mt-3.5 md:mt-4">
-              No need to predict the market.
-            </p>
-            <p className="m-0 mt-3 text-balance sm:mt-3.5 md:mt-4">
-              Your capital works in both modes.
-            </p>
-          </div>
+          <Title>Dual-Sided Strategy</Title>
+          <Description>
+            Market price volatility is an opportunity. No need to predict the market. <br></br>Your capital works in both modes.
+          </Description>
         </div>
 
         {/* Strategy Cards Grid */}
@@ -43,12 +31,10 @@ export function StrategySection() {
                 Buy Low, Sell High
               </h3>
 
-              <div className="font-sans text-[1.1rem] text-white/60 leading-relaxed mb-10 flex-grow space-y-2">
-                <p>Use USDC to buy dips and sell rallies.</p>
-                <p className="font-medium">
-                  Result: Your USDC grows.
-                </p>
-              </div>
+              <Description className="mb-10">
+                Use USDC to buy dips and sell rallies.<br></br>
+                Result: Your USDC grows.
+              </Description>
 
               {/* Graphic */}
               <div className="w-full h-40 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-center p-6 relative">
@@ -95,14 +81,10 @@ export function StrategySection() {
                 Sell High, Buy Low
               </h3>
 
-              <div className="font-sans text-[1.1rem] text-white/60 leading-relaxed mb-10 flex-grow space-y-2">
-                <p>
-                  Sell peaks and rebuy dips.
-                </p>
-                <p className="font-medium">
-                  Result: You accumulate more SOL
-                </p>
-              </div>
+              <Description className="mb-10">
+                Sell peaks and rebuy dips.<br></br>
+                Result: You accumulate more SOL
+              </Description>
 
               {/* Graphic */}
               <div className="w-full h-40 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-center p-6 relative">

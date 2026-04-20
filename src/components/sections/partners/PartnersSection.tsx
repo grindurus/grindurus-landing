@@ -1,4 +1,5 @@
 import { INTEGRATED_PARTNERS } from '../../../constants/partners'
+import { Title } from '@/components/ui/Title'
 
 export function PartnersSection() {
   const marqueeItems = [
@@ -11,9 +12,7 @@ export function PartnersSection() {
   return (
     <section className="py-24 border-b border-black/10 dark:border-white/[0.08] overflow-hidden bg-black">
       <div className="max-w-[1280px] mx-auto px-8">
-        <h2 className="font-mono font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.2] text-black dark:text-white text-center mb-6">
-          Integrated with
-        </h2>
+        <Title className="text-center mb-6">Integrated With</Title>
       </div>
       <div className="overflow-hidden marquee-mask">
         <div className="flex gap-12 w-max px-6 animate-[marquee-scroll_30s_linear_infinite] hover:[animation-play-state:paused]">

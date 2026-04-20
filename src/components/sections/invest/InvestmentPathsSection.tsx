@@ -1,16 +1,16 @@
 import { APP_URL } from '../../../config'
+import { Title } from "@/components/ui/Title"
+import { Description } from '@/components/ui/Description'
 
 export function InvestmentPathsSection() {
   return (
     <section className="w-full py-24 bg-black border-b border-black/10 dark:border-white/[0.08] relative">
       <div className="max-w-[1280px] mx-auto px-8">
         <div className="text-center mb-16">
-          <h2 className="font-mono font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.2] text-white mb-6">
-            Join the Ecosystem
-          </h2>
-          <p className="font-mono text-lg text-white/60 max-w-[600px] mx-auto">
+          <Title>Join the Ecosystem</Title>
+          <Description className="max-w-[600px] mx-auto">
             Whether you're an individual investor looking for yield, or a protocol looking to harvest your own volatility, we have a path for you.
-          </p>
+          </Description>
         </div>
 
         <div className="flex gap-8">
@@ -26,9 +26,9 @@ export function InvestmentPathsSection() {
             <h3 className="font-mono font-bold text-3xl text-white mb-4">
               Retail Co-Investor
             </h3>
-            <p className="font-mono text-white/60 mb-10 leading-relaxed flex-1">
+            <Description className="mb-10 flex-1">
               You don't need millions to capture institutional yield. Invest in the general crowdfunding pool to become a "co-investor" and start earning from the exact same automated strategies powering the GrindURUS network.
-            </p>
+            </Description>
             
             <a
               href={`${APP_URL}/grinders`}
@@ -51,9 +51,9 @@ export function InvestmentPathsSection() {
             <h3 className="font-mono font-bold text-3xl text-white mb-4">
               Private Client
             </h3>
-            <p className="font-mono text-white/60 mb-10 leading-relaxed flex-1">
+            <Description className="mb-10 flex-1">
               If you have a token project or a large treasury, we can market take for you separately. Become a private client and deploy our volatility harvesting infrastructure specifically on your native asset pairs to stabilize price action and grow treasury depth.
-            </p>
+            </Description>
             
             <a
               href="mailto:contact@grindurus.xyz" // fallback or direct link to contact logic

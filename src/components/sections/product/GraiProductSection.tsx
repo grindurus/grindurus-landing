@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { APP_URL } from '../../../config'
 import tokenUsdc from '@/assets/token-usdc.svg'
+import { Title } from "@/components/ui/Title"
+import { Description } from '@/components/ui/Description'
 
 const SOL_TOKEN_IMG =
   'https://assets.coingecko.com/coins/images/4128/small/solana.png'
@@ -52,16 +54,14 @@ export function GraiProductSection() {
       <div className="flex justify-between max-w-[1280px] mx-auto px-8">
         {/* Left: Text Content */}
         <div className="flex min-w-0 max-w-full flex-col items-start overflow-x-auto text-left">
-          <h2 className="flex flex-col gap-2 w-full font-mono font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.2] text-white mb-6">
+          <Title className="flex flex-col gap-2">
             <div className="text-white">Onchain Foundation.</div>
             <div className="text-brand-pink">Tokenized Volatility.</div>
-          </h2>
-          <p className="font-mono text-[1.05rem] leading-[1.7] text-white/70 max-w-[500px] mb-8">
-          Earn from volatility without trading.
-          </p>
-          <p className="font-mono text-[1.05rem] leading-[1.7] text-white/70 mb-8 whitespace-nowrap">
+          </Title>
+          <Description className="mb-10">
+            Earn from volatility without trading.<br></br>
             GRAI gives you passive access to the GrindURUS strategy.
-          </p>
+          </Description>
           <a
             href={`${APP_URL}/grinders`}
             className="inline-flex items-center justify-center font-mono font-bold text-sm text-white px-8 py-3.5 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-[0_4px_24px_rgba(255,105,180,0.4)]"
