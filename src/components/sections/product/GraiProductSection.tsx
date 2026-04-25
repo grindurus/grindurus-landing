@@ -3,6 +3,7 @@ import { APP_URL } from '../../../config'
 import tokenUsdc from '@/assets/token-usdc.svg'
 import { Title } from "@/components/ui/Title"
 import { Description } from '@/components/ui/Description'
+import { Button } from '@/components/ui/Button'
 
 const SOL_TOKEN_IMG =
   'https://assets.coingecko.com/coins/images/4128/small/solana.png'
@@ -50,7 +51,7 @@ export function GraiProductSection() {
   }
 
   return (
-    <section className="relative w-full py-12 md:py-16 bg-black">
+    <section className="relative w-full py-6 md:py-12 lg:py-16 bg-black">
       <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-8 max-w-[1280px] mx-auto px-4 sm:px-8">
         {/* Left: Text Content */}
         <div className="flex min-w-0 max-w-full flex-col items-start text-left">
@@ -62,13 +63,9 @@ export function GraiProductSection() {
             Earn from volatility without trading.<br></br>
             GRAI gives you passive access to the GrindURUS strategy.
           </Description>
-          <a
-            href={`${APP_URL}/grinders`}
-            className="inline-flex items-center justify-center font-mono font-bold text-sm text-white px-8 py-3.5 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-[0_4px_24px_rgba(255,105,180,0.4)]"
-            style={{ background: 'linear-gradient(90deg, #ff69b4, #ff1493)' }}
-          >
+          <Button href={`${APP_URL}/grinders`} size="md">
             Explore GRAI
-          </a>
+          </Button>
         </div>
 
         {/* Right: chain carousel + GRAI */}
@@ -111,55 +108,55 @@ export function GraiProductSection() {
           </div>
 
           <div className="relative flex min-h-[260px] w-full flex-1 items-center justify-center">
-          <div className="absolute w-[300px] h-[300px] rounded-full border-[1.5px] border-white/10 flex items-center justify-center
+            <div className="absolute w-[300px] h-[300px] rounded-full border-[1.5px] border-white/10 flex items-center justify-center
                           shadow-[inset_0_0_80px_rgba(255,105,180,0.1),0_0_120px_rgba(255,105,180,0.15)] animate-[spin_30s_linear_infinite]">
-            <div className="w-[80%] h-[80%] rounded-full border border-dashed border-white/20 animate-[spin_40s_linear_infinite_reverse]"></div>
-          </div>
+              <div className="w-[80%] h-[80%] rounded-full border border-dashed border-white/20 animate-[spin_40s_linear_infinite_reverse]"></div>
+            </div>
 
-          <div className="relative z-10 flex h-[220px] w-[220px] shrink-0 items-center justify-center overflow-visible">
-            {/*
+            <div className="relative z-10 flex h-[220px] w-[220px] shrink-0 items-center justify-center overflow-visible">
+              {/*
               2D orbit: spinner shares the exact same flex center as the GRAI badge (no inline transform
               fighting Tailwind translate). Electrons on opposite sides of a circle — true closed path
               around the nucleus.
             */}
-            <div
-              className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center"
-              aria-hidden
-            >
-              <div className="relative h-[156px] w-[156px] animate-[spin_26s_linear_infinite]">
-                {graiOrbitElectrons.map(({ angleDeg, img, glowDelayClass }) => (
-                  <div
-                    key={angleDeg}
-                    className="absolute left-1/2 top-1/2"
-                    style={{
-                      transform: `translate(-50%, -50%) rotate(${angleDeg}deg) translateY(-${GRAI_ORBIT_R}px)`,
-                    }}
-                  >
-                    <div className="flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center animate-[spin_26s_linear_infinite_reverse]">
-                      <img
-                        src={img}
-                        alt=""
-                        width={36}
-                        height={36}
-                        className={`h-9 w-9 object-contain animate-grai-token-glow ${glowDelayClass}`}
-                      />
+              <div
+                className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center"
+                aria-hidden
+              >
+                <div className="relative h-[156px] w-[156px] animate-[spin_26s_linear_infinite]">
+                  {graiOrbitElectrons.map(({ angleDeg, img, glowDelayClass }) => (
+                    <div
+                      key={angleDeg}
+                      className="absolute left-1/2 top-1/2"
+                      style={{
+                        transform: `translate(-50%, -50%) rotate(${angleDeg}deg) translateY(-${GRAI_ORBIT_R}px)`,
+                      }}
+                    >
+                      <div className="flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center animate-[spin_26s_linear_infinite_reverse]">
+                        <img
+                          src={img}
+                          alt=""
+                          width={36}
+                          height={36}
+                          className={`h-9 w-9 object-contain animate-grai-token-glow ${glowDelayClass}`}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+              </div>
+              <div
+                className="relative z-10 flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border-[3px] border-white/10 bg-black
+                          shadow-[0_0_60px_rgba(0,0,0,0.8),inset_0_4px_20px_rgba(255,255,255,0.1)]"
+              >
+                <span
+                  className="font-mono font-black text-4xl text-transparent bg-clip-text leading-none"
+                  style={{ backgroundImage: 'linear-gradient(135deg, #fff, #ff69b4)' }}
+                >
+                  GRAI
+                </span>
               </div>
             </div>
-            <div
-              className="relative z-10 flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border-[3px] border-white/10 bg-black
-                          shadow-[0_0_60px_rgba(0,0,0,0.8),inset_0_4px_20px_rgba(255,255,255,0.1)]"
-            >
-              <span
-                className="font-mono font-black text-4xl text-transparent bg-clip-text leading-none"
-                style={{ backgroundImage: 'linear-gradient(135deg, #fff, #ff69b4)' }}
-              >
-                GRAI
-              </span>
-            </div>
-          </div>
           </div>
         </div>
       </div>

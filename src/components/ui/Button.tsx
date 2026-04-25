@@ -1,33 +1,44 @@
-import { Ref } from 'react'
+import { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react'
 
-interface ButtonProps {
-  href: string
+type ButtonProps = {
+  href?: string
   children: React.ReactNode
   size?: 'sm' | 'md' | 'lg'
   className?: string
-  innerRef?: Ref<HTMLAnchorElement>
-}
+  noGradient?: boolean
+} & ButtonHTMLAttributes<HTMLButtonElement> & AnchorHTMLAttributes<HTMLAnchorElement>
 
 const sizeClasses = {
-  sm: 'text-sm px-6 py-2.5',
-  md: 'text-[1rem] px-8 py-3.5',
-  lg: 'text-base px-10 py-4',
+  sm: 'text-sm px-4 sm:px-6 py-2 sm:py-2.5',
+  md: 'text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5',
+  lg: 'text-base sm:text-lg px-8 sm:px-10 py-3.5 sm:py-4',
 }
 
-export function Button({ href, children, size = 'lg', className = '', innerRef }: ButtonProps) {
+const baseClasses = 'inline-flex items-center justify-center font-mono font-bold text-white no-underline rounded-xl transition-all duration-200 hover:opacity-80'
+
+export function Button({ href, children, size = 'lg', className = '', noGradient, ...props }: ButtonProps) {
+  const combinedClassName = [
+    baseClasses,
+    sizeClasses[size],
+    className,
+  ].filter(Boolean).join(' ')
+
+  const style =
+    !noGradient
+      ? { background: 'linear-gradient(90deg, #ff69b4, #ff1493)' }
+      : {}
+
+  if (href) {
+    return (
+      <a href={href} className={combinedClassName} style={style} {...props as AnchorHTMLAttributes<HTMLAnchorElement>}>
+        {children}
+      </a>
+    )
+  }
+
   return (
-    <a
-      ref={innerRef}
-      href={href}
-      className={[
-        'inline-block no-underline font-mono font-bold text-white rounded-xl',
-        'transition-all duration-200 hover:opacity-80',
-        sizeClasses[size],
-        className,
-      ].join(' ')}
-      style={{ background: 'linear-gradient(90deg,#ff69b4,#ff1493)' }}
-    >
+    <button className={combinedClassName} style={style} {...props as ButtonHTMLAttributes<HTMLButtonElement>}>
       {children}
-    </a>
+    </button>
   )
 }

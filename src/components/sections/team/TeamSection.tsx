@@ -12,7 +12,7 @@ function LinkedInIcon({ className }: { className?: string }) {
 
 export function TeamSection() {
   return (
-    <section className="w-full bg-black py-16 md:py-24">
+    <section className="w-full bg-black py-6 md:py-12 lg:py-16">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
         <div className="mb-12 text-center md:mb-16">
           <Title>Core Team</Title>

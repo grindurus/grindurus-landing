@@ -4,7 +4,7 @@ import { Description } from '@/components/ui/Description'
 
 export function StrategySection() {
   return (
-    <section className="w-full pt-16 pb-10 md:pt-24 md:pb-12 bg-black relative overflow-hidden">
+    <section className="w-full py-6 md:py-12 lg:py-16 bg-black relative overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
         {/* Section heading */}
         <div className="text-center mb-10 md:mb-16 md:mb-24">
@@ -18,7 +18,7 @@ export function StrategySection() {
         <div className="flex flex-col sm:flex-row gap-6 md:gap-8 mb-12 md:mb-20">
 
           {/* Card 1: Buy Low, Sell High */}
-          <div className="flex-1 bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 relative overflow-hidden group hover:border-brand-pink/30 hover:shadow-[0_20px_60px_rgba(255,105,180,0.1)] transition-all duration-500">
+          <div className="flex-1 bg-[#0a0a0a] border border-white/10 rounded-3xl p-4 md:p-6 relative overflow-hidden group hover:border-brand-pink/30 hover:shadow-[0_20px_60px_rgba(255,105,180,0.1)] transition-all duration-500">
             {/* Inner Glow */}
             <div className="absolute -top-[150px] -right-[150px] w-[300px] h-[300px] bg-brand-pink/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-brand-pink/20 transition-colors duration-500"></div>
 
@@ -67,7 +67,7 @@ export function StrategySection() {
           </div>
 
           {/* Card 2: Sell High, Buy Low */}
-          <div className="flex-1 bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 relative overflow-hidden group hover:border-brand-red/30 hover:shadow-[0_20px_60px_rgba(255,20,147,0.1)] transition-all duration-500">
+          <div className="flex-1 bg-[#0a0a0a] border border-white/10 rounded-3xl p-4 md:p-6 relative overflow-hidden group hover:border-brand-red/30 hover:shadow-[0_20px_60px_rgba(255,20,147,0.1)] transition-all duration-500">
             {/* Inner Glow */}
             <div className="absolute -top-[150px] -right-[150px] w-[300px] h-[300px] bg-brand-red/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-brand-red/20 transition-colors duration-500"></div>
 

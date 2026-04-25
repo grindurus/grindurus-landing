@@ -3,9 +3,9 @@ interface DescriptionProps {
   className?: string
 }
 
-export function Description({ children, className } : DescriptionProps) {
+export function Description({ children, className }: DescriptionProps) {
   return (
-    <div className={`font-mono text-white/60 leading-relaxed ${className ?? ""}`}>
+    <div className={`text-sm md:text-base font-mono text-white/60 leading-relaxed ${className ?? ""}`}>
       {children}
     </div>
   )

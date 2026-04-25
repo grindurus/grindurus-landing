@@ -10,11 +10,11 @@ export function PartnersSection() {
   ]
 
   return (
-    <section className="py-14 md:py-24 overflow-hidden bg-black">
+    <section className="py-6 md:py-12 lg:py-16 overflow-hidden overflow-x-hidden max-w-[100vw] bg-black">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Title className="text-center mb-6">Integrated With</Title>
       </div>
-      <div className="overflow-hidden marquee-mask">
+      <div className="relative w-full max-w-full overflow-hidden marquee-mask">
         <div className="flex gap-12 w-max px-6 animate-[marquee-scroll_30s_linear_infinite] hover:[animation-play-state:paused]">
           {marqueeItems.map((p, i) => (
             <a
@@ -26,7 +26,7 @@ export function PartnersSection() {
             >
               {p.imgLight ? (
                 <>
-                  <img src={p.img}      alt={p.name} width={40} height={40} className="object-contain hidden dark:block" aria-hidden />
+                  <img src={p.img} alt={p.name} width={40} height={40} className="object-contain hidden dark:block" aria-hidden />
                   <img src={p.imgLight} alt={p.name} width={40} height={40} className="object-contain block dark:hidden" aria-hidden />
                 </>
               ) : (

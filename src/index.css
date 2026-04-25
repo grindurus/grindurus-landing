@@ -10,6 +10,7 @@
 
   html {
     overflow-y: scroll;
+    overflow-x: hidden;
     scrollbar-gutter: stable;
   }
 
@@ -17,6 +18,7 @@
     @apply min-h-screen min-w-[320px] bg-black text-white/[.87] antialiased;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   [data-theme="light"] body {

@@ -6,9 +6,9 @@ export function HeroSection() {
   return (
     <>
       {/* ── MOBILE layout (hidden on md+) ── */}
-      <section className="md:hidden w-full bg-black flex flex-col items-center text-center px-6 pt-16 pb-14 overflow-hidden">
+      <section className="pt-[74px] md:hidden w-full bg-black flex flex-col items-center text-center px-6 pt-16 pb-14 overflow-hidden min-h-[90vh]">
         {/* Headline */}
-        <h1 className="font-mono font-black text-[clamp(2.2rem,10vw,3rem)] leading-[1.2] mb-8">
+        <h1 className="font-mono font-black text-[clamp(2.2rem,10vw,3rem)] leading-[1.2] mb-4 mt-32">
           <span className="block text-brand-pink text-[1.2em] [text-shadow:0_0_20px_black]">GrindURUS</span>
           <span className="block text-white text-[0.6em] [text-shadow:0_0_20px_black]">
             Automated Market Taking
@@ -21,7 +21,7 @@ export function HeroSection() {
         </div>
 
         {/* Description + CTA */}
-        <p className="font-mono text-[clamp(0.9rem,3.5vw,1rem)] leading-[1.7] text-white/70 mt-8 mb-8 max-w-[380px]">
+        <p className="font-mono text-[clamp(0.9rem,3.5vw,1rem)] leading-[1.7] text-white/70 mb-8 max-w-[380px]">
           Infrastructure for Turning Price Volatility into yield
         </p>
         <Button href={`${APP_URL}/grinders`} size="md">
@@ -31,7 +31,7 @@ export function HeroSection() {
 
       {/* ── DESKTOP layout (hidden below md) ── */}
       <section
-        className="hidden md:flex relative w-full min-h-[90vh] bg-black items-center justify-center overflow-hidden"
+        className="mt-[74px] hidden md:flex relative w-full min-h-[90vh] bg-black items-center justify-center overflow-hidden"
       >
         {/* Background animation layer */}
         <OrbitRing />

@@ -3,6 +3,7 @@ import { APP_URL } from '../../../config'
 import { Button } from "@/components/ui/Button"
 import { Title } from '@/components/ui/Title'
 import { Description } from '@/components/ui/Description'
+import { FieldLabel } from '@/components/ui/FieldLabel'
 
 const YIELD_MIN = 10
 const YIELD_MAX = 60
@@ -78,18 +79,14 @@ function OutputStats() {
     <div className="bg-black border border-white/10 rounded-xl px-4 py-4 flex items-stretch divide-x divide-white/10">
       {/* Yield % */}
       <div className="flex-1 flex flex-col items-center text-center pr-4">
-        <span className="font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-1.5">
-          Annual Yield
-        </span>
+        <FieldLabel className="mb-1.5 text-center">Annual Yield</FieldLabel>
         <span className="font-mono font-black text-2xl text-[#4ade80] tabular-nums leading-none">
           +{yield_.toFixed(1)}%
         </span>
       </div>
       {/* Final amount */}
       <div className="flex-1 flex flex-col items-center text-center pl-4">
-        <span className="font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-1.5">
-          Final Amount
-        </span>
+        <FieldLabel className="mb-1.5 text-center">Final Amount</FieldLabel>
         <span className="font-mono font-black text-2xl text-white tabular-nums leading-none">
           ${finalFormatted}
         </span>
@@ -98,9 +95,17 @@ function OutputStats() {
   )
 }
 
+function Or() {
+  return (
+    <span className="text-white/40">
+      or
+    </span>
+  )
+}
+
 export function CalculatorCtaSection() {
   return (
-    <section className="w-full py-12 md:py-14 lg:py-16 bg-black relative">
+    <section className="w-full py-6 md:py-12 lg:py-16 bg-black relative">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center relative z-10">
 
@@ -117,7 +122,7 @@ export function CalculatorCtaSection() {
               The calculator reveals exactly how volatile an asset is and exactly how much our infrastructure could earn from it.
             </Description>
 
-            <Button href={`${APP_URL}/calculator`} size="lg">
+            <Button href={`${APP_URL}/calculator`} size="md">
               Launch Calculator
             </Button>
           </div>
@@ -125,59 +130,30 @@ export function CalculatorCtaSection() {
           {/* Right Graphic: Mock Calculator Widget */}
           <div className="relative flex items-center justify-center">
             <div className="bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 flex flex-col gap-6 w-full">
-
-              {/* Panel header */}
-              <div className="flex items-center justify-between">
-                <span className="block font-sans text-xs text-white/40 uppercase tracking-widest font-bold">
-                  Calculator
-                </span>
-                <span className="font-mono text-xs text-white/25 tracking-wider">CALC_ENGINE_V2</span>
-              </div>
-
-              {/* Asset Pair */}
               <div>
-                <span className="block font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-2">
-                  Asset Pair
-                </span>
-                <div className="bg-black border border-white/10 rounded-xl px-4 py-3 flex items-center justify-between hover:border-brand-pink/30 transition-colors duration-150 group">
-                  <span className="font-sans text-sm text-white/50">Pair</span>
-                  <span className="font-mono font-bold text-white group-hover:text-brand-pink transition-colors duration-150">SOL / USDC</span>
+                <FieldLabel>Asset Pair</FieldLabel>
+                <div className="w-full flex items-center gap-2 bg-black border border-white/10 rounded-xl px-4 py-3 font-mono font-bold text-white text-sm cursor-pointer">
+                  SOL/USDC <Or /> BTC/USDT <Or /> ETH/USDT <Or /> ...
                 </div>
               </div>
-
-              {/* Timeframe */}
               <div>
-                <span className="block font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-2">
-                  Timeframe
-                </span>
-                <div className="bg-black border border-white/10 rounded-xl px-4 py-3 flex items-center justify-between hover:border-brand-pink/30 transition-colors duration-150 group">
-                  <span className="font-sans text-sm text-white/50">Period</span>
-                  <span className="font-mono font-bold text-white group-hover:text-brand-pink transition-colors duration-150">30 Days</span>
+                <FieldLabel>Timeframe</FieldLabel>
+                <div className="w-full flex items-center gap-2 bg-black border border-white/10 rounded-xl px-4 py-3 font-mono font-bold text-white text-sm cursor-pointer">
+                  30 days (1 month) <Or /> 2 months <Or /> 3 months <Or /> ...
                 </div>
               </div>
 
               {/* Initial Capital */}
               <div>
-                <span className="block font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-2">
-                  Initial Capital
-                </span>
-                <div className="bg-black border border-white/10 rounded-xl px-4 py-3 flex items-center justify-between relative overflow-hidden">
-                  <span className="font-sans text-sm text-white/50">Amount</span>
-                  <div className="font-mono font-bold text-white text-right leading-snug">
-                    <span className="block">25 SOL</span>
-                    <span className="block text-white/50 text-[0.8125rem] font-semibold">$5,000</span>
+                <FieldLabel>Initial Capital</FieldLabel>
+                <div className="bg-black border border-white/10 rounded-xl px-4 py-3 flex items-center justify-between relative overflow-hidden group">
+                  <div className="font-mono font-bold text-white flex items-baseline gap-2">
+                    <span className="group-hover:text-brand-pink transition-colors duration-150">25 SOL</span>
+                    <span className="text-white/40 font-semibold">($5,000)</span>
                   </div>
-                  <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-brand-pink to-transparent w-full"></div>
                 </div>
               </div>
-
-              {/* Output Stats */}
-              <div>
-                <span className="block font-sans text-xs text-white/40 uppercase tracking-widest font-bold mb-2">
-                  Projected Results
-                </span>
-                <OutputStats />
-              </div>
+              <OutputStats />
 
             </div>
           </div>

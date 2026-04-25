@@ -96,35 +96,13 @@ export function PerformanceChart({
         background: "#0a0a0a",
         borderRadius: 16,
         border: "1px solid rgba(255,255,255,0.08)",
-        padding: "24px 24px 16px",
+        padding: "10px",
         width: "100%",
         height: "100%",
         boxSizing: "border-box",
       }}
     >
-      {/* Header row */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: 12,
-        }}
-      >
-        <p
-          style={{
-            margin: 0,
-            color: "rgba(255,255,255,0.7)",
-            fontSize: 13,
-            fontWeight: 600,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-          }}
-        >
-          Performance Chart
-        </p>
-        <CustomLegend strategyLabel={strategyLabel} marketLabel={marketLabel} />
-      </div>
+      <CustomLegend strategyLabel={strategyLabel} marketLabel={marketLabel} />
 
       {/* Chart */}
       <ResponsiveContainer width="100%" height={320}>
