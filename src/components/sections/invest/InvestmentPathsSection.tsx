@@ -31,7 +31,7 @@ export function InvestmentPathsSection() {
             <Description className="mb-10 flex-1">
               You don't need millions to capture institutional yield. Invest in the general crowdfunding pool to become a "co-investor" and start earning from the exact same automated strategies powering the GrindURUS network.
             </Description>
-            <Button href={`${APP_URL}/grinders`} size="md">
+            <Button href={`${APP_URL}/grai`} size="md">
               Enter Pool
             </Button>
           </div>

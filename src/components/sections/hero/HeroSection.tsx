@@ -22,9 +22,9 @@ export function HeroSection() {
 
         {/* Description + CTA */}
         <p className="font-mono text-[clamp(0.9rem,3.5vw,1rem)] leading-[1.7] text-white/70 mb-8 max-w-[380px]">
-          Infrastructure for Turning Price Volatility into yield
+          Infrastructure for Turning Price Volatility into Yield
         </p>
-        <Button href={`${APP_URL}/grinders`} size="md">
+        <Button href={APP_URL} size="md">
           Open App
         </Button>
       </section>
@@ -52,10 +52,10 @@ export function HeroSection() {
               text-white/75 dark:text-white/80 mb-10 mx-auto [text-shadow:0_0_20px_black]
               whitespace-nowrap"
             >
-              Infrastructure for Turning Price Volatility into yield
+              Infrastructure for Turning Price Volatility into Yield
             </p>
 
-            <Button href={`${APP_URL}/grinders`} size="md">
+            <Button href={APP_URL} size="md">
               Open App
             </Button>
           </div>

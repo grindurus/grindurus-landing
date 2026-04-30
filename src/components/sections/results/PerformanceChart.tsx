@@ -37,8 +37,13 @@ function CustomLegend({ strategyLabel, marketLabel }: { strategyLabel: string; m
             boxShadow: "0 0 6px rgba(255,105,180,0.65)",
           }}
         />
-        <span style={{ color: "#ff69b4", fontSize: 13, fontWeight: 600, letterSpacing: "0.04em" }}>
-          {strategyLabel}
+        <span style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", lineHeight: 1.15 }}>
+          <span style={{ color: "#ff69b4", fontSize: 13, fontWeight: 600, letterSpacing: "0.04em" }}>
+            {strategyLabel}
+          </span>
+          <span style={{ color: "rgba(255,255,255,0.55)", fontSize: 10, letterSpacing: "0.03em" }}>
+            volatility yield
+          </span>
         </span>
       </span>
       <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -51,8 +56,13 @@ function CustomLegend({ strategyLabel, marketLabel }: { strategyLabel: string; m
             display: "inline-block",
           }}
         />
-        <span style={{ color: "#00d4ff", fontSize: 13, fontWeight: 600, letterSpacing: "0.04em" }}>
-          {marketLabel}
+        <span style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", lineHeight: 1.15 }}>
+          <span style={{ color: "#00d4ff", fontSize: 13, fontWeight: 600, letterSpacing: "0.04em" }}>
+            {marketLabel}
+          </span>
+          <span style={{ color: "rgba(255,255,255,0.55)", fontSize: 10, letterSpacing: "0.03em" }}>
+            locked yield
+          </span>
         </span>
       </span>
     </div>

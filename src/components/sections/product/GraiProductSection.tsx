@@ -63,7 +63,7 @@ export function GraiProductSection() {
             Earn from volatility without trading.<br></br>
             GRAI gives you passive access to the GrindURUS strategy.
           </Description>
-          <Button href={`${APP_URL}/grinders`} size="md">
+          <Button href={`${APP_URL}/grai`} size="md">
             Explore GRAI
           </Button>
         </div>

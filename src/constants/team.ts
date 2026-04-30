@@ -21,7 +21,7 @@ export const TEAM: TeamMember[] = [
   {
     photo: '/team/ivan.jpeg',
     fullname: 'Ivan Synenko',
-    role: 'Backend Dev, insurance guru',
+    role: 'Backend Dev, EPAM Systems',
     linkedin: 'https://www.linkedin.com/in/ivan-synenko-45227a294/'
   }
 ]

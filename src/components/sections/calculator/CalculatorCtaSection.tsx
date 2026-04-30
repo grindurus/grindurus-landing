@@ -122,7 +122,7 @@ export function CalculatorCtaSection() {
               The calculator reveals exactly how volatile an asset is and exactly how much our infrastructure could earn from it.
             </Description>
 
-            <Button href={`${APP_URL}/calculator`} size="md">
+            <Button href={`${APP_URL}/backtest`} size="md">
               Launch Calculator
             </Button>
           </div>

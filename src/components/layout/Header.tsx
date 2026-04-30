@@ -19,7 +19,7 @@ function Header() {
 
         {/* Actions */}
         <div className="flex items-center gap-4">
-          <Button href={`${APP_URL}/grinders`} size="sm">
+          <Button href={APP_URL} size="sm">
             Open App
           </Button>
         </div>
