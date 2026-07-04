@@ -8,7 +8,7 @@
   "properties": {
     "category": "fungible",
     "bosses": [
-      "https://localhost:3001",
+      "https://boss.localhost",
       "https://boss.grindurus.xyz"
     ],
     "docs": "https://docs.grindurus.xyz",
