@@ -1,6 +1,5 @@
 import { TEAM } from '../../../constants/team'
 import { Title } from '@/components/ui/Title'
-import { Description } from '@/components/ui/Description'
 
 function LinkedInIcon({ className }: { className?: string }) {
   return (
@@ -16,9 +15,6 @@ export function TeamSection() {
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
         <div className="mb-12 text-center md:mb-16">
           <Title>Core Team</Title>
-          <Description className="mx-auto max-w-[640px]">
-            GrindURUS is built and maintained by Triple Panic Labs
-          </Description>
         </div>
         <div className="mb-16 grid gap-12 md:mb-20 md:grid-cols-3 md:gap-10 lg:gap-12">
           {TEAM.map((member, id) => (

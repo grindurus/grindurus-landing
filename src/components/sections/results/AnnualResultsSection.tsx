@@ -2,7 +2,6 @@ import { useState, useMemo } from "react"
 import * as Select from "@radix-ui/react-select"
 import { Title } from "@/components/ui/Title"
 import { PerformanceChart, type ChartDataPoint } from "./PerformanceChart"
-import { Description } from "@/components/ui/Description"
 import { FieldLabel } from "@/components/ui/FieldLabel"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -250,10 +249,6 @@ export function AnnualResultsSection() {
 
         <div className="text-center mb-12">
           <Title>Performance</Title>
-          <Description>
-            GRAI gives you passive access to the GrindURUS strategy.<br />
-            Earn from volatility without trading.
-          </Description>
         </div>
 
         {/* controls above chart on mobile, 1/3+2/3 from md */}

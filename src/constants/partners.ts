@@ -1,5 +1,6 @@
 import binanceLogo from '@/assets/binance-logo.png'
 import cowLogo from '@/assets/cow-logo.png'
+import arbitrumLogo from '@/assets/arbitrum-logo.svg'
 import logoLifiDark from '@/assets/logo_lifi_dark.svg'
 import logoLifiLight from '@/assets/logo_lifi_light.svg'
 
@@ -22,7 +23,7 @@ export const INTEGRATED_PARTNERS: Partner[] = [
     id: 'arbitrum',
     name: 'ARBITRUM',
     href: 'https://arbitrum.io',
-    img: 'https://assets.coingecko.com/coins/images/16547/small/photo_2023-03-29_21.47.00.jpeg',
+    img: arbitrumLogo,
   },
   {
     id: 'binance',

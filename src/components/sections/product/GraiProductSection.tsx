@@ -59,10 +59,13 @@ export function GraiProductSection() {
             <div className="text-white">Onchain Foundation.</div>
             <div className="text-brand-pink">Tokenized Volatility.</div>
           </Title>
-          <Description className="mb-10">
-            Earn from volatility without trading.<br></br>
-            GRAI gives you passive access to the GrindURUS strategy.
+          <Description>
+            Earn from price volatility without trading.<br></br>
+            GRAI gives you passive access to the yield
           </Description>
+          <p className="mb-10 mt-3 text-sm md:text-base font-mono text-brand-pink leading-relaxed">
+            Deposit assets. Receive GRAI. Let GrindURUS harvest volatility.
+          </p>
           <Button href={`${APP_URL}/grai`} size="md">
             Explore GRAI
           </Button>

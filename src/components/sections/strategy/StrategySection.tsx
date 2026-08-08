@@ -1,8 +1,28 @@
-import { Title } from "@/components/ui/Title"
-import { SubTitle } from "@/components/ui/SubTitle"
+import { useEffect, useState } from 'react'
+import { Title } from '@/components/ui/Title'
+import { SubTitle } from '@/components/ui/SubTitle'
 import { Description } from '@/components/ui/Description'
 
+const STRATEGY_PAIRS = [
+  { base: 'SOL', quote: 'USDC' },
+  { base: 'ETH', quote: 'USDC' },
+  { base: 'BTC', quote: 'USDC' },
+  { base: 'ARB', quote: 'USDC' },
+] as const
+
+const PAIR_ROTATE_MS = 5_000
+
 export function StrategySection() {
+  const [pairIndex, setPairIndex] = useState(0)
+  const { base, quote } = STRATEGY_PAIRS[pairIndex]!
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setPairIndex((current) => (current + 1) % STRATEGY_PAIRS.length)
+    }, PAIR_ROTATE_MS)
+    return () => window.clearInterval(id)
+  }, [])
+
   return (
     <section className="w-full py-6 md:py-12 lg:py-16 bg-black relative overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
@@ -59,8 +79,12 @@ export function StrategySection() {
                   <circle cx="110" cy="15" r="4" fill="#fff" className="animate-pulse" style={{ animationDelay: '1s' }} />
 
                   {/* Labels */}
-                  <text x="60" y="70" fill="#ff69b4" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">BUY (SOL)</text>
-                  <text x="110" y="7" fill="#fff" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">SELL (+USDC)</text>
+                  <text x="60" y="70" fill="#ff69b4" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">
+                    BUY (+{base})
+                  </text>
+                  <text x="110" y="7" fill="#fff" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">
+                    SELL (+{quote})
+                  </text>
                 </svg>
               </div>
             </div>
@@ -108,8 +132,12 @@ export function StrategySection() {
                   <circle cx="110" cy="55" r="4" fill="#fff" className="animate-pulse" style={{ animationDelay: '1s' }} />
 
                   {/* Labels */}
-                  <text x="60" y="7" fill="#ff1493" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">SELL (USDC)</text>
-                  <text x="110" y="70" fill="#fff" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">BUY (+SOL)</text>
+                  <text x="60" y="7" fill="#ff1493" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">
+                    SELL (+{quote})
+                  </text>
+                  <text x="110" y="70" fill="#fff" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">
+                    BUY (+{base})
+                  </text>
                 </svg>
               </div>
             </div>
