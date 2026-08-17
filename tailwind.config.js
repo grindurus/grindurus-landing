@@ -39,6 +39,35 @@ export default {
           '0%, 100%': { opacity: '0.32' },
           '50%':      { opacity: '1' },
         },
+        'grai-holder-idle': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%':      { transform: 'translateY(-5px)' },
+        },
+        'grai-lock-jiggle': {
+          '0%, 70%, 100%': { transform: 'rotate(0deg)' },
+          '76%':           { transform: 'rotate(-10deg)' },
+          '82%':           { transform: 'rotate(7deg)' },
+          '88%':           { transform: 'rotate(-4deg)' },
+        },
+        'grai-disc-twist': {
+          '0%, 100%': { transform: 'rotate(-2deg)' },
+          '50%':      { transform: 'rotate(2deg)' },
+        },
+        'grai-yield-l': {
+          '0%':   { opacity: '0', transform: 'translate3d(0, 10px, 0) scale(0.7)' },
+          '12%':  { opacity: '1', transform: 'translate3d(-8px, -8px, 0) scale(1)' },
+          '100%': { opacity: '0', transform: 'translate3d(-30px, -118px, 0) scale(0.9)' },
+        },
+        'grai-yield-r': {
+          '0%':   { opacity: '0', transform: 'translate3d(0, 10px, 0) scale(0.7)' },
+          '12%':  { opacity: '1', transform: 'translate3d(8px, -8px, 0) scale(1)' },
+          '100%': { opacity: '0', transform: 'translate3d(30px, -118px, 0) scale(0.9)' },
+        },
+        'grai-yield-c': {
+          '0%':   { opacity: '0', transform: 'translate3d(0, 8px, 0) scale(0.7)' },
+          '12%':  { opacity: '1', transform: 'translate3d(0, -12px, 0) scale(1)' },
+          '100%': { opacity: '0', transform: 'translate3d(6px, -128px, 0) scale(0.9)' },
+        },
       },
       animation: {
         shimmer:              'shimmer 8s ease-in-out infinite',
@@ -46,6 +75,12 @@ export default {
         'orbit-infinity':     'orbit-infinity 0s linear',  /* driven by RAF, not CSS */
         'grai-token-pulse':   'grai-token-pulse 4.5s ease-in-out infinite',
         'grai-token-glow':    'grai-token-glow 3.4s ease-in-out infinite',
+        'grai-holder-idle':   'grai-holder-idle 4.2s ease-in-out infinite',
+        'grai-lock-jiggle':   'grai-lock-jiggle 5.2s ease-in-out infinite',
+        'grai-disc-twist':    'grai-disc-twist 3.4s ease-in-out infinite',
+        'grai-yield-l':       'grai-yield-l 4.8s ease-out infinite',
+        'grai-yield-r':       'grai-yield-r 4.8s ease-out infinite',
+        'grai-yield-c':       'grai-yield-c 4.8s ease-out infinite',
       },
       minHeight: {
         '70vh': '70vh',

@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { Title } from '@/components/ui/Title'
 import { SubTitle } from '@/components/ui/SubTitle'
 import { Description } from '@/components/ui/Description'
+import usdcSvg from '@/assets/token-usdc.svg'
+import wethSvg from '@/assets/token-weth.svg'
+import arbitrumLogo from '@/assets/arbitrum-logo.svg'
 
 const STRATEGY_PAIRS = [
   { base: 'SOL', quote: 'USDC' },
@@ -10,7 +13,92 @@ const STRATEGY_PAIRS = [
   { base: 'ARB', quote: 'USDC' },
 ] as const
 
+type StrategySymbol = (typeof STRATEGY_PAIRS)[number]['base'] | (typeof STRATEGY_PAIRS)[number]['quote']
+
+const TOKEN_ICONS: Record<StrategySymbol, string> = {
+  USDC: usdcSvg,
+  ETH: wethSvg,
+  ARB: arbitrumLogo,
+  SOL: 'https://assets.coingecko.com/coins/images/4128/small/solana.png',
+  BTC: 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png',
+}
+
 const PAIR_ROTATE_MS = 5_000
+const LABEL_ICON = 7
+const LABEL_ICON_GAP = 1.6
+
+function labelWidth(text: string) {
+  if (!text) return 0
+  return text.length * 3.6 + Math.max(0, text.length - 1)
+}
+
+function StrategyPairLabel({
+  id,
+  x,
+  y,
+  fill,
+  action,
+  symbol,
+}: {
+  id: string
+  x: number
+  y: number
+  fill: string
+  action: 'BUY' | 'SELL'
+  symbol: StrategySymbol
+}) {
+  const icon = TOKEN_ICONS[symbol]
+  const prefix = `${action} (+`
+  const ticker = `${symbol})`
+  const prefixW = labelWidth(prefix)
+  const tickerW = labelWidth(ticker)
+  const total = prefixW + LABEL_ICON_GAP + LABEL_ICON + LABEL_ICON_GAP + tickerW
+  const start = x - total / 2
+  const iconX = start + prefixW + LABEL_ICON_GAP
+  const tickerX = iconX + LABEL_ICON + LABEL_ICON_GAP
+  const clipId = `strategy-pair-icon-${id}`
+  const iconCy = y - 1.6
+
+  return (
+    <g>
+      <clipPath id={clipId}>
+        <circle cx={iconX + LABEL_ICON / 2} cy={iconCy} r={LABEL_ICON / 2} />
+      </clipPath>
+      <text
+        x={start}
+        y={y}
+        fill={fill}
+        fontSize="6"
+        fontFamily="monospace"
+        textAnchor="start"
+        fontWeight="bold"
+        letterSpacing="1"
+      >
+        {prefix}
+      </text>
+      <image
+        href={icon}
+        x={iconX}
+        y={y - LABEL_ICON + 1.9}
+        width={LABEL_ICON}
+        height={LABEL_ICON}
+        clipPath={`url(#${clipId})`}
+      />
+      <text
+        x={tickerX}
+        y={y}
+        fill={fill}
+        fontSize="6"
+        fontFamily="monospace"
+        textAnchor="start"
+        fontWeight="bold"
+        letterSpacing="1"
+      >
+        {ticker}
+      </text>
+    </g>
+  )
+}
 
 export function StrategySection() {
   const [pairIndex, setPairIndex] = useState(0)
@@ -79,12 +167,8 @@ export function StrategySection() {
                   <circle cx="110" cy="15" r="4" fill="#fff" className="animate-pulse" style={{ animationDelay: '1s' }} />
 
                   {/* Labels */}
-                  <text x="60" y="70" fill="#ff69b4" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">
-                    BUY (+{base})
-                  </text>
-                  <text x="110" y="7" fill="#fff" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">
-                    SELL (+{quote})
-                  </text>
+                  <StrategyPairLabel id="direct-buy" x={60} y={70} fill="#ff69b4" action="BUY" symbol={base} />
+                  <StrategyPairLabel id="direct-sell" x={110} y={7} fill="#fff" action="SELL" symbol={quote} />
                 </svg>
               </div>
             </div>
@@ -132,12 +216,8 @@ export function StrategySection() {
                   <circle cx="110" cy="55" r="4" fill="#fff" className="animate-pulse" style={{ animationDelay: '1s' }} />
 
                   {/* Labels */}
-                  <text x="60" y="7" fill="#ff1493" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">
-                    SELL (+{quote})
-                  </text>
-                  <text x="110" y="70" fill="#fff" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="bold" letterSpacing="1">
-                    BUY (+{base})
-                  </text>
+                  <StrategyPairLabel id="inverse-sell" x={60} y={7} fill="#ff1493" action="SELL" symbol={quote} />
+                  <StrategyPairLabel id="inverse-buy" x={110} y={70} fill="#fff" action="BUY" symbol={base} />
                 </svg>
               </div>
             </div>
