@@ -24,6 +24,8 @@ const TOKEN_ICONS: Record<StrategySymbol, string> = {
 }
 
 const PAIR_ROTATE_MS = 5_000
+const TITLE_SLIDES = ['Dual-Sided Strategy', 'Automated Market Taker'] as const
+const TITLE_ROTATE_MS = 4_200
 const LABEL_ICON = 7
 const LABEL_ICON_GAP = 1.6
 
@@ -102,6 +104,7 @@ function StrategyPairLabel({
 
 export function StrategySection() {
   const [pairIndex, setPairIndex] = useState(0)
+  const [titleIndex, setTitleIndex] = useState(0)
   const { base, quote } = STRATEGY_PAIRS[pairIndex]!
 
   useEffect(() => {
@@ -111,12 +114,37 @@ export function StrategySection() {
     return () => window.clearInterval(id)
   }, [])
 
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const id = window.setInterval(() => {
+      setTitleIndex((current) => (current + 1) % TITLE_SLIDES.length)
+    }, TITLE_ROTATE_MS)
+    return () => window.clearInterval(id)
+  }, [])
+
   return (
     <section className="w-full py-6 md:py-12 lg:py-16 bg-black relative overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
         {/* Section heading */}
         <div className="text-center mb-10 md:mb-16 md:mb-24">
-          <Title>Dual-Sided Strategy</Title>
+          <Title className="whitespace-nowrap">
+            <span className="grid" aria-live="polite">
+              {TITLE_SLIDES.map((slide, slideIndex) => {
+                const active = slideIndex === titleIndex
+                return (
+                  <span
+                    key={slide}
+                    className={`col-start-1 row-start-1 transition-opacity duration-700 ${
+                      active ? 'opacity-100' : 'pointer-events-none opacity-0'
+                    }`}
+                    aria-hidden={active ? undefined : true}
+                  >
+                    {slide}
+                  </span>
+                )
+              })}
+            </span>
+          </Title>
           <Description>
             Market price volatility is an opportunity. No need to predict the market. <br></br>Your capital works in both modes.
           </Description>

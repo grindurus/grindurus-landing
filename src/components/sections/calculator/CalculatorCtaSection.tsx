@@ -123,7 +123,7 @@ export function CalculatorCtaSection() {
             </Description>
 
             <Button href={`${APP_URL}/backtest`} size="md">
-              Launch Calculator
+              Launch Calculator (soon)
             </Button>
           </div>
 

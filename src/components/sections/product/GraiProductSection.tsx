@@ -11,15 +11,26 @@ export function GraiProductSection() {
         {/* Left: Text Content */}
         <div className="flex min-w-0 max-w-full flex-col items-start text-left">
           <Title className="flex flex-col gap-2">
-            <div className="text-white">Onchain Foundation.</div>
-            <div className="text-brand-pink">Tokenized Volatility.</div>
+            <div className="text-white">
+              <span className="block">
+                <span className="text-brand-pink">GR</span>inders
+              </span>
+              <span className="block">
+                <span className="text-brand-pink">A</span>rtificial
+              </span>
+              <span className="block">
+                <span className="text-brand-pink">I</span>ndex.
+              </span>
+            </div>
           </Title>
           <Description>
-            Earn from price volatility without trading.<br></br>
-            GRAI gives you passive access to the yield
+            <span className="text-brand-pink">GRAI</span> gives you passive access to the{' '}
+            <span className="text-brand-pink">yield</span>
+            <br></br>
+            You earn <span className="text-brand-pink">yield</span> directly to your wallet.
           </Description>
-          <p className="mb-10 mt-3 text-sm md:text-base font-mono text-brand-pink leading-relaxed">
-            Deposit assets. Receive GRAI. Let GrindURUS harvest volatility.
+          <p className="mb-10 mt-3 text-sm md:text-base font-mono leading-relaxed text-white">
+            Let GrindURUS harvest volatility.
           </p>
           <Button href={`${APP_URL}/grai`} size="md">
             Explore GRAI

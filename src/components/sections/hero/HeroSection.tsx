@@ -9,9 +9,8 @@ export function HeroSection() {
       <section className="pt-[74px] md:hidden w-full bg-black flex flex-col items-center text-center px-6 pt-16 pb-14 overflow-hidden min-h-[90vh]">
         {/* Headline */}
         <h1 className="font-mono font-black text-[clamp(2.2rem,10vw,3rem)] leading-[1.2] mb-4 mt-32">
-          <span className="block text-brand-pink text-[1.2em] [text-shadow:0_0_20px_black]">GrindURUS</span>
-          <span className="block text-white text-[0.6em] [text-shadow:0_0_20px_black]">
-            Automated Market Taking
+          <span className="block text-brand-pink text-[clamp(1.85rem,8vw,2.7rem)] whitespace-nowrap [text-shadow:0_0_20px_black]">
+            Onchain Hedge Fund
           </span>
         </h1>
 
@@ -38,18 +37,17 @@ export function HeroSection() {
 
         {/* Hero text – sits above animation */}
         <div className="max-w-[1280px] mx-auto px-8 w-full flex justify-center">
-          <div className="relative z-10 text-center max-w-[800px] w-full">
-            <h1 className="font-mono font-black text-[clamp(2.5rem,6vw,5rem)] leading-[1.2]">
-              <span className="block text-brand-pink text-[1.2em] [text-shadow:0_0_20px_black]">GrindURUS</span>
-              <span className="block text-white dark:text-white text-[0.6em] [text-shadow:0_0_20px_black] pb-6">
-                Automated Market Taking
+          <div className="relative z-10 text-center w-full">
+            <h1 className="font-mono font-black text-[clamp(2.5rem,6vw,5rem)] leading-[1.2] pb-6">
+              <span className="block text-brand-pink text-[clamp(2.6rem,5.2vw,4.5rem)] whitespace-nowrap [text-shadow:0_0_20px_black]">
+                Onchain Hedge Fund
               </span>
             </h1>
 
             <p
               className="
               font-mono text-[clamp(0.95rem,2vw,1.1rem)] leading-[1.7]
-              text-white/75 dark:text-white/80 mb-10 mx-auto [text-shadow:0_0_20px_black]
+              text-white/75 dark:text-white/80 mb-4 mx-auto [text-shadow:0_0_20px_black]
               whitespace-nowrap"
             >
               Infrastructure for Turning Price Volatility into Yield
